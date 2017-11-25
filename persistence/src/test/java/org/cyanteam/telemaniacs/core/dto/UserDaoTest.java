@@ -1,4 +1,4 @@
-package org.cyanteam.telemaniacs.core.dao;
+package org.cyanteam.telemaniacs.core.dto;
 
 import org.cyanteam.telemaniacs.core.PersistenceContextConfiguration;
 import org.cyanteam.telemaniacs.core.entities.User;
@@ -13,7 +13,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.validation.ConstraintViolationException;

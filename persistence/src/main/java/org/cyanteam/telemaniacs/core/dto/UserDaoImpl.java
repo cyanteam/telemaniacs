@@ -1,4 +1,4 @@
-package org.cyanteam.telemaniacs.core.dao;
+package org.cyanteam.telemaniacs.core.dto;
 
 import java.util.Collections;
 import java.util.List;

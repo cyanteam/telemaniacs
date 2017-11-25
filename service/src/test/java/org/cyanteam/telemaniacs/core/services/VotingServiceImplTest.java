@@ -20,7 +20,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import org.cyanteam.telemaniacs.core.ServiceContextConfiguration;
-import org.cyanteam.telemaniacs.core.dao.VotingDao;
+import org.cyanteam.telemaniacs.core.dto.VotingDao;
 import org.cyanteam.telemaniacs.core.entities.Transmission;
 import org.cyanteam.telemaniacs.core.entities.User;
 import org.cyanteam.telemaniacs.core.entities.Voting;

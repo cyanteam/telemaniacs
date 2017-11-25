@@ -1,7 +1,7 @@
 package org.cyanteam.telemaniacs.core.services;
 
-import org.cyanteam.telemaniacs.core.dao.TransmissionDao;
-import org.cyanteam.telemaniacs.core.dao.TransmissionOccurrenceDao;
+import org.cyanteam.telemaniacs.core.dto.TransmissionDao;
+import org.cyanteam.telemaniacs.core.dto.TransmissionOccurrenceDao;
 import org.cyanteam.telemaniacs.core.entities.Transmission;
 import org.cyanteam.telemaniacs.core.entities.TransmissionOccurrence;
 import org.cyanteam.telemaniacs.core.entities.Voting;

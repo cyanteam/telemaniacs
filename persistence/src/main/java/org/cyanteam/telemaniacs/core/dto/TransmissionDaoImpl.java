@@ -1,4 +1,4 @@
-package org.cyanteam.telemaniacs.core.dao;
+package org.cyanteam.telemaniacs.core.dto;
 
 import org.cyanteam.telemaniacs.core.entities.Transmission;
 import org.springframework.stereotype.Repository;
@@ -6,8 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.validation.ConstraintViolationException;
 
 /**
  * @author Simona Tinkova

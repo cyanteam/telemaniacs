@@ -5,7 +5,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityExistsException;
 import javax.persistence.TransactionRequiredException;
 
-import org.cyanteam.telemaniacs.core.dao.VotingDao;
+import org.cyanteam.telemaniacs.core.dto.VotingDao;
 import org.cyanteam.telemaniacs.core.entities.Transmission;
 import org.cyanteam.telemaniacs.core.entities.User;
 import org.cyanteam.telemaniacs.core.entities.Voting;

@@ -1,4 +1,4 @@
-package org.cyanteam.telemaniacs.core.dao;
+package org.cyanteam.telemaniacs.core.dto;
 
 import org.cyanteam.telemaniacs.core.PersistenceContextConfiguration;
 import org.cyanteam.telemaniacs.core.entities.Transmission;

@@ -1,6 +1,6 @@
 package org.cyanteam.telemaniacs.core.services;
 
-import org.cyanteam.telemaniacs.core.dao.UserDao;
+import org.cyanteam.telemaniacs.core.dto.UserDao;
 import org.cyanteam.telemaniacs.core.entities.User;
 import org.springframework.stereotype.Service;
 
