@@ -77,6 +77,7 @@ public class UserBuilder {
     
     public User build() {
         User user = new User();
+        user.setId(id);
         user.setSex(sex);
         user.setAge(age);
         user.setEmail(email);

@@ -5,6 +5,7 @@ import org.cyanteam.telemaniacs.core.entities.Channel;
 import org.cyanteam.telemaniacs.core.entities.User;
 import org.cyanteam.telemaniacs.core.helpers.ChannelBuilder;
 import org.cyanteam.telemaniacs.core.helpers.UserBuilder;
+import org.cyanteam.telemaniacs.core.dao.UserDao;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,17 +16,28 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.when;
 
 /**
- *
+ * Tests for implementation of favorite channels service.
  * @author Miroslav Kubus
  */
 @ContextConfiguration(classes = ServiceContextConfiguration.class)
 @RunWith(SpringJUnit4ClassRunner.class)
 public class FavoriteChannelsServiceImplTest {
+    @Mock
+    private UserDao userDao;
     
+    @InjectMocks
     private final FavoriteChannelsService favoriteChannelsService = new FavoriteChannelsServiceImpl();
     
     private User youngUser;
@@ -34,7 +46,9 @@ public class FavoriteChannelsServiceImplTest {
     private Channel channel2;
        
     @Before
-    public void setup() throws ServiceException {        
+    public void setup() throws ServiceException {  
+        MockitoAnnotations.initMocks(this);
+
         channel1 = ChannelBuilder
                 .disneyChannel()
                 .build();
@@ -44,14 +58,40 @@ public class FavoriteChannelsServiceImplTest {
         List<Channel> helpList = new ArrayList<>();
         helpList.add(channel1);
         helpList.add(channel2);
-        adultUser = UserBuilder
-                .sampleAdultUserBuilder()
-                .build();
         youngUser = UserBuilder
                 .sampleYoungUserBuilder()
+                .id(1L)
                 .favouriteChannels(helpList)
                 .build();
+        adultUser = UserBuilder
+                .sampleAdultUserBuilder()
+                .id(2L)
+                .build();
     }
+    
+    @Before
+    public void initMocks() {               
+        doAnswer((Answer<Object>) (InvocationOnMock invocation) -> {
+            Object argument = invocation.getArguments()[0];
+            if(argument == null) {
+                throw new IllegalArgumentException();
+            }
+            
+            User user = (User) argument;
+            if(user.getId() == null || user.getEmail() == null){
+                throw new IllegalArgumentException();
+            }
+            
+            return null;
+        }).when(userDao).update(any(User.class));
+           
+        when(userDao.findById(1L))
+            .thenReturn(youngUser);
+        
+        when(userDao.findById(2L))
+            .thenReturn(adultUser);
+    }
+    
     
     @Test
     public void getFavoriteChannelsTest() {
