@@ -1,16 +1,13 @@
 package org.cyanteam.telemaniacs.core.services;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import org.cyanteam.telemaniacs.core.ServiceContextConfiguration;
 import org.cyanteam.telemaniacs.core.dao.ChannelDao;
 import org.cyanteam.telemaniacs.core.entities.Channel;
 import org.cyanteam.telemaniacs.core.helpers.ChannelBuilder;
 import org.cyanteam.telemaniacs.core.utils.TvManagerDataAccessException;
-import org.junit.BeforeClass;
+
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -19,10 +16,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.cyanteam.telemaniacs.core.utils.ListUtils.createList;
@@ -30,11 +25,9 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.when;
 
-
 /**
  * @author Simona Tinkova
  */
-
 @ContextConfiguration(classes = ServiceContextConfiguration.class)
 @RunWith(SpringJUnit4ClassRunner.class)
 public class ChannelServiceImplTest {

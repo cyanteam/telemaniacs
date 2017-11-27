@@ -1,22 +1,21 @@
 package org.cyanteam.telemaniacs.core.services;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import org.cyanteam.telemaniacs.core.ServiceContextConfiguration;
 import org.cyanteam.telemaniacs.core.entities.Channel;
 import org.cyanteam.telemaniacs.core.entities.User;
 import org.cyanteam.telemaniacs.core.helpers.ChannelBuilder;
-import org.cyanteam.telemaniacs.core.helpers.TransmissionBuilder;
 import org.cyanteam.telemaniacs.core.helpers.UserBuilder;
-import org.cyanteam.telemaniacs.core.helpers.VotingBuilder;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import org.hibernate.service.spi.ServiceException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**

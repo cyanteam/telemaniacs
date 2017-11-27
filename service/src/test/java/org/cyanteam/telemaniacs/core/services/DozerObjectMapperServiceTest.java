@@ -3,11 +3,11 @@ package org.cyanteam.telemaniacs.core.services;
 import org.cyanteam.telemaniacs.core.ServiceContextConfiguration;
 import org.cyanteam.telemaniacs.core.services.mapper.DestinationObject;
 import org.cyanteam.telemaniacs.core.services.mapper.SourceObject;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;

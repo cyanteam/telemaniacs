@@ -1,8 +1,6 @@
 package org.cyanteam.telemaniacs.core.services;
 
 import org.cyanteam.telemaniacs.core.ServiceContextConfiguration;
-import org.cyanteam.telemaniacs.core.dao.TransmissionDao;
-import org.cyanteam.telemaniacs.core.dao.UserDao;
 import org.cyanteam.telemaniacs.core.entities.Transmission;
 import org.cyanteam.telemaniacs.core.entities.Channel;
 import org.cyanteam.telemaniacs.core.entities.TransmissionOccurrence;
@@ -15,19 +13,14 @@ import org.cyanteam.telemaniacs.core.helpers.VotingBuilder;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.testng.annotations.BeforeMethod;
 
 import javax.inject.Inject;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
 import static org.cyanteam.telemaniacs.core.utils.ListUtils.createList;
-import static org.mockito.Mockito.verify;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**

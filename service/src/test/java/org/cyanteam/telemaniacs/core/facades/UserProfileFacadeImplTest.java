@@ -11,15 +11,13 @@ import org.cyanteam.telemaniacs.core.enums.Sex;
 import org.cyanteam.telemaniacs.core.facade.UserProfileFacade;
 import org.cyanteam.telemaniacs.core.helpers.TransmissionBuilder;
 import org.cyanteam.telemaniacs.core.services.*;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.*;
-import org.springframework.aop.framework.Advised;
-import org.springframework.aop.support.AopUtils;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.util.ReflectionTestUtils;
 
 import javax.inject.Inject;
 import java.time.Duration;
@@ -27,7 +25,6 @@ import java.util.List;
 import java.util.Objects;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.within;
 import static org.cyanteam.telemaniacs.core.utils.ListUtils.createList;
 import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.verify;

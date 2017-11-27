@@ -3,16 +3,16 @@ package org.cyanteam.telemaniacs.core.facades;
 import org.cyanteam.telemaniacs.core.ServiceContextConfiguration;
 import org.cyanteam.telemaniacs.core.dto.TransmissionDTO;
 import org.cyanteam.telemaniacs.core.facade.TransmissionFacade;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-//import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertNull;
 import static junit.framework.TestCase.assertTrue;
