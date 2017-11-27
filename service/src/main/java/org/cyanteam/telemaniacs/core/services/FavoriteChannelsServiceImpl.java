@@ -1,7 +1,8 @@
 package org.cyanteam.telemaniacs.core.services;
 
-import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
+import org.cyanteam.telemaniacs.core.dao.UserDao;
 
 import org.cyanteam.telemaniacs.core.entities.Channel;
 import org.cyanteam.telemaniacs.core.entities.User;
@@ -14,15 +15,18 @@ import org.springframework.stereotype.Service;
 @Service
 public class FavoriteChannelsServiceImpl implements FavoriteChannelsService {
 
+    @Inject
+    private UserDao userDao;
+    
     @Override
     public void followChannel(Channel channel, User user) {
         List<Channel> favoriteChannels = user.getFavoriteChannels();
 
         if(!favoriteChannels.contains(channel)) {
             favoriteChannels.add(channel);
+            user.setFavoriteChannels(favoriteChannels);
+            userDao.update(user);
         }
-        
-        user.setFavoriteChannels(favoriteChannels);
     }
 
     @Override
@@ -31,14 +35,13 @@ public class FavoriteChannelsServiceImpl implements FavoriteChannelsService {
         
         if(favoriteChannels.contains(channel)) {
             favoriteChannels.remove(channel);
-        }
-        
-        user.setFavoriteChannels(favoriteChannels);
+            user.setFavoriteChannels(favoriteChannels);
+            userDao.update(user);
+        }        
     }
 
     @Override
     public List<Channel> getFavoriteChannels(User user) {
-        return user.getFavoriteChannels();
+        return userDao.findById(user.getId()).getFavoriteChannels();
     }
-    
 }
