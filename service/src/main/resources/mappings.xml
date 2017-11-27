@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozermapper.github.io/schema/bean-mapping"
+		  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		  xsi:schemaLocation="http://dozermapper.github.io/schema/bean-mapping http://dozermapper.github.io/schema/bean-mapping.xsd">
+	<mapping>
+		<class-a>org.cyanteam.telemaniacs.core.entities.Transmission</class-a>
+		<class-b>org.cyanteam.telemaniacs.core.dto.TransmissionDTO</class-b>
+		<field-exclude>
+			<a>occurrences</a>
+			<b>occurrences</b>
+		</field-exclude>
+	</mapping>
+
+	<mapping>
+		<class-a>org.cyanteam.telemaniacs.core.entities.Channel</class-a>
+		<class-b>org.cyanteam.telemaniacs.core.dto.ChannelDTO</class-b>
+		<field-exclude>
+			<a>transmissionOccurrences</a>
+			<b>transmissionOccurrences</b>
+		</field-exclude>
+	</mapping>
+</mappings>
