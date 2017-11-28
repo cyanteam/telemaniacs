@@ -28,7 +28,7 @@ import static org.mockito.Mockito.when;
  */
 @ContextConfiguration(classes = ServiceContextConfiguration.class)
 @RunWith(SpringJUnit4ClassRunner.class)
-public class UserServiceTest {
+public class UserServiceImplTest {
 
     @Mock
     private UserDao userDao;
@@ -56,19 +56,19 @@ public class UserServiceTest {
 
     @Test
     public void createUserTest() {
-        userService.createUser(user, "pass");
+        userService.create(user, "pass");
         verify(userDao).create(user);
     }
 
     @Test
     public void updateUserTest() {
-        userService.updateUser(user);
+        userService.update(user);
         verify(userDao).update(user);
     }
 
     @Test
     public void removeUserTest() {
-        userService.removeUser(user);
+        userService.remove(user);
         verify(userDao).remove(user);
     }
 
@@ -76,7 +76,7 @@ public class UserServiceTest {
     public void findUserByIdTest() {
         when(userDao.findById(1L)).thenReturn(user);
 
-        User result = userService.findUserById(1L);
+        User result = userService.findById(1L);
         verify(userDao).findById(1L);
         assertThat(result).isEqualToComparingFieldByFieldRecursively(user);
     }
@@ -85,7 +85,7 @@ public class UserServiceTest {
     public void findUserByUsernameTest() {
         when(userDao.findByUsername("username")).thenReturn(user);
 
-        User result = userService.findUserByUserName("username");
+        User result = userService.findByUserName("username");
         verify(userDao).findByUsername("username");
         assertThat(result).isEqualToComparingFieldByFieldRecursively(user);
     }
@@ -94,7 +94,7 @@ public class UserServiceTest {
     public void findUserByEmailTest() {
         when(userDao.findByEmail("email")).thenReturn(user);
 
-        User result = userService.findUserByEmail("email");
+        User result = userService.findByEmail("email");
         verify(userDao).findByEmail("email");
         assertThat(result).isEqualToComparingFieldByFieldRecursively(user);
     }
@@ -103,7 +103,7 @@ public class UserServiceTest {
     public void findAllUsersTest() {
         when(userDao.findAll()).thenReturn(Lists.newArrayList(user, admin));
 
-        List<User> result = userService.findAllUsers();
+        List<User> result = userService.findAll();
         verify(userDao).findAll();
         assertThat(result).isNotNull();
         assertThat(result).containsExactlyInAnyOrder(user, admin);
@@ -111,7 +111,7 @@ public class UserServiceTest {
 
     @Test
     public void authenticateTest() {
-        userService.createUser(user, "somePassword");
+        userService.create(user, "somePassword");
 
         assertThat(userService.authenticate(user, "somePassword")).isTrue();
     }

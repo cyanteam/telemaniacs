@@ -12,6 +12,7 @@ import org.cyanteam.telemaniacs.core.services.UserServiceImpl;
 import java.util.Arrays;
 import javax.inject.Inject;
 import javax.naming.AuthenticationException;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,6 +30,7 @@ import static org.mockito.Mockito.when;
 
 /**
  * Tests for user facade implementation.
+ *
  * @author Miroslav Kubus
  */
 @ContextConfiguration(classes = ServiceContextConfiguration.class)
@@ -50,7 +52,7 @@ public class UserFacadeImplTest {
     @Before
     public void init() {
         MockitoAnnotations.initMocks(this);
-        
+
         youngUser = UserBuilder
                 .sampleYoungUserBuilder()
                 .id(1L)
@@ -60,37 +62,37 @@ public class UserFacadeImplTest {
                 .sampleAdultUserBuilder()
                 .id(2L)
                 .build();
-        
-        when(userService.findUserById(1L)).thenReturn(youngUser);
-        when(userService.findUserByEmail("adultUser@test.com")).thenReturn(adultUser);
-        when(userService.findAllUsers()).thenReturn(Arrays.asList(adultUser, youngUser));
-        when(userService.findUserByUserName("Young User")).thenReturn(youngUser);
+
+        when(userService.findById(1L)).thenReturn(youngUser);
+        when(userService.findByEmail("adultUser@test.com")).thenReturn(adultUser);
+        when(userService.findAll()).thenReturn(Arrays.asList(adultUser, youngUser));
+        when(userService.findByUserName("Young User")).thenReturn(youngUser);
     }
-    
+
     @Test
     public void createUserTest() {
         UserDTO userDTO = new UserDTO();
         userDTO.setUsername("TestName");
 
-        userFacade.createUser(userDTO, youngUser.getPasswordHash());
-        verify(userService).createUser(any(User.class), any(String.class));
+        userFacade.create(userDTO, youngUser.getPasswordHash());
+        verify(userService).create(any(User.class), any(String.class));
     }
-    
+
     @Test
     public void updateUserTest() {
         UserDTO userDTO = new UserDTO();
         userDTO.setUsername("TestName");
 
-        userFacade.updateUser(userDTO);
-        verify(userService).updateUser(any(User.class));
+        userFacade.update(userDTO);
+        verify(userService).update(any(User.class));
     }
-    
+
     @Test
     public void removeUserTest() {
         UserDTO userDTO = new UserDTO();
-        
-        userFacade.removeUser(userDTO);
-        verify(userService).removeUser(any(User.class));
+
+        userFacade.remove(userDTO);
+        verify(userService).remove(any(User.class));
     }
 
     @Test
@@ -106,20 +108,20 @@ public class UserFacadeImplTest {
 
     @Test
     public void findUserByIdTest() {
-        userFacade.getUserById(1L);
-        verify(userService, atLeastOnce()).findUserById(1L);
+        userFacade.findById(1L);
+        verify(userService, atLeastOnce()).findById(1L);
     }
 
     @Test
     public void findUserByEmailTest() {
-        userFacade.getUserByEmail("adultUser@test.com");
-        verify(userService, atLeastOnce()).findUserByEmail("adultUser@test.com");
+        userFacade.findByEmail("adultUser@test.com");
+        verify(userService, atLeastOnce()).findByEmail("adultUser@test.com");
     }
-    
+
     @Test
     public void findUserByUserNameTest() {
-        userFacade.getUserByUsername("Young User");
-        verify(userService, atLeastOnce()).findUserByUserName("Young User");
+        userFacade.findByUsername("Young User");
+        verify(userService, atLeastOnce()).findByUserName("Young User");
     }
 
     @Test
@@ -131,10 +133,10 @@ public class UserFacadeImplTest {
         userFacade.isAdmin(userDTO);
         verify(userService).isAdmin(any(User.class));
     }
- 
+
     @Test
     public void getAllUsersTest() {
-        userFacade.getAllUsers();
-        verify(userService, atLeastOnce()).findAllUsers();
+        userFacade.findAll();
+        verify(userService, atLeastOnce()).findAll();
     }
 }

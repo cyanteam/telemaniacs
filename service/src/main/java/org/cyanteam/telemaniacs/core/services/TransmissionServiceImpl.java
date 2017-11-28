@@ -33,37 +33,37 @@ public class TransmissionServiceImpl implements TransmissionService {
     private TransmissionOccurrenceDao transmissionOccurrenceDao;
 
     @Override
-    public void createTransmission(Transmission transmission) {
+    public void create(Transmission transmission) {
         transmissionDao.create(transmission);
     }
 
     @Override
-    public void updateTransmission(Transmission transmission) {
+    public void update(Transmission transmission) {
         transmissionDao.update(transmission);
     }
 
     @Override
-    public void removeTransmission(Transmission transmission) {
+    public void remove(Transmission transmission) {
         transmissionDao.delete(transmission);
     }
 
     @Override
-    public Transmission getTransmissionById(Long id) {
+    public Transmission findById(Long id) {
         return transmissionDao.findById(id);
     }
 
     @Override
-    public Transmission getTransmissionByName(String name) {
+    public Transmission findByName(String name) {
         return transmissionDao.findByName(name);
     }
 
     @Override
-    public List<Transmission> getTransmissionsByType(TransmissionType type) {
+    public List<Transmission> findAllByType(TransmissionType type) {
         return transmissionDao.findByType(type);
     }
 
     @Override
-    public List<Transmission> findAllTransmissions() {
+    public List<Transmission> findAll() {
         try {
             return transmissionDao.findAll();
         } catch (Throwable e) {

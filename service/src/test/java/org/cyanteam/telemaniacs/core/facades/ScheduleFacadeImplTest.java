@@ -30,12 +30,11 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
- *
  * @author Tomas Milota
  */
 @ContextConfiguration(classes = ServiceContextConfiguration.class)
 @RunWith(SpringJUnit4ClassRunner.class)
-public class ScheduleFacadeTest {
+public class ScheduleFacadeImplTest {
 
     @Inject
     @Spy

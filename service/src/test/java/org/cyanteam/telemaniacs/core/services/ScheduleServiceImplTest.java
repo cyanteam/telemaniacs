@@ -29,7 +29,7 @@ import static org.cyanteam.telemaniacs.core.utils.ListUtils.createList;
  */
 @ContextConfiguration(classes = ServiceContextConfiguration.class)
 @RunWith(SpringJUnit4ClassRunner.class)
-public class ScheduleServiceTest {
+public class ScheduleServiceImplTest {
 
     @Inject
     private ScheduleService scheduleService;

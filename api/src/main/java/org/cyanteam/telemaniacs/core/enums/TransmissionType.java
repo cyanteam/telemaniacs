@@ -2,6 +2,7 @@ package org.cyanteam.telemaniacs.core.enums;
 
 /**
  * Enum for transmission type
+ *
  * @author Simona Tinkova
  */
 public enum TransmissionType {

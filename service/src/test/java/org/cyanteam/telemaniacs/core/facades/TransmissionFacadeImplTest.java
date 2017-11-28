@@ -24,102 +24,101 @@ import static org.junit.Assert.assertNotNull;
 @ContextConfiguration(classes = ServiceContextConfiguration.class)
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TransmissionFacadeImplTest {
-	@Autowired
-	@InjectMocks
-	private TransmissionFacade transmissionFacade;
+    @Autowired
+    @InjectMocks
+    private TransmissionFacade transmissionFacade;
 
-	private TransmissionDTO transmission1;
-	private TransmissionDTO transmission2;
-	private TransmissionDTO newTransmission;
-
-
-	@Before
-	public void createTransmissions() {
-		transmission1 = getTransmissionHelper("tran1");
-		transmission2 = getTransmissionHelper("tran2");
-		newTransmission = getTransmissionHelper("new-transmission");
-
-		transmissionFacade.create(transmission1);
-		assertTrue(transmissionFacade.findAll().contains(transmission1));
-
-		transmissionFacade.create(transmission2);
-		assertTrue(transmissionFacade.findAll().contains(transmission2));
-
-		transmission1 = transmissionFacade.findById(transmission1.getId());
-		transmission2 = transmissionFacade.findById(transmission2.getId());
-	}
+    private TransmissionDTO transmission1;
+    private TransmissionDTO transmission2;
+    private TransmissionDTO newTransmission;
 
 
-	@After
-	public void deleteTransmissions() {
-		if (transmissionFacade.findAll().contains(transmission1)) {
-			transmissionFacade.delete(transmission1);
-			assertFalse(transmissionFacade.findAll().contains(transmission1));
-		}
+    @Before
+    public void createTransmissions() {
+        transmission1 = getTransmissionHelper("tran1");
+        transmission2 = getTransmissionHelper("tran2");
+        newTransmission = getTransmissionHelper("new-transmission");
 
-		if (transmissionFacade.findAll().contains(transmission2)) {
-			transmissionFacade.delete(transmission2);
-			assertFalse(transmissionFacade.findAll().contains(transmission2));
-		}
+        transmissionFacade.create(transmission1);
+        assertTrue(transmissionFacade.findAll().contains(transmission1));
 
-		if (transmissionFacade.findAll().contains(newTransmission)) {
-			transmissionFacade.delete(newTransmission);
-			assertFalse(transmissionFacade.findAll().contains(newTransmission));
-		}
-	}
+        transmissionFacade.create(transmission2);
+        assertTrue(transmissionFacade.findAll().contains(transmission2));
 
-	@Test
-	public void shouldCreateTransmission() throws Exception {
-		transmissionFacade.create(newTransmission);
-		assertEquals(transmissionFacade.findById(newTransmission.getId()), newTransmission);
-		assertTrue(transmissionFacade.findAll().contains(newTransmission));
-	}
-
-	@Test
-	public void shouldFindByTransmissionId() throws Exception {
-		assertEquals(transmissionFacade.findById(transmission1.getId()), transmission1);
-		assertEquals(transmissionFacade.findById(transmission2.getId()), transmission2);
-	}
-
-	@Test
-	public void shouldFindByTransmissionName() throws Exception {
-		assertEquals(transmissionFacade.findByName(transmission1.getName()), transmission1);
-		assertEquals(transmissionFacade.findByName(transmission2.getName()), transmission2);
-	}
-
-	@Test(expected = DataAccessException.class)
-	public void findByTransmissionNameNonExisting() {
-		transmissionFacade.findByName("non-existing");
-	}
-
-	@Test
-	public void shouldFindAllTransmissions() throws Exception {
-		assertTrue(transmissionFacade.findAll().contains(transmission1));
-		assertTrue(transmissionFacade.findAll().contains(transmission2));
-		assertEquals(transmissionFacade.findAll().size(), 2);
-	}
-
-	@Test
-	public void shouldUpdateTransmission() throws Exception {
-		transmission1.setName("tran");
-		//logger.info("Transmission id: " + transmission1.getId());
-		transmissionFacade.update(transmission1);
-		assertEquals(transmissionFacade.findAll().size(), 2);
-		assertEquals(transmissionFacade.findById(transmission1.getId()), transmission1);
-	}
-
-	@Test
-	public void shouldDeleteTransmission() throws Exception {
-		assertNotNull(transmissionFacade.findById(transmission1.getId()));
-		transmissionFacade.delete(transmission1);
-		assertFalse(transmissionFacade.findAll().contains(transmission1));
-	}
+        transmission1 = transmissionFacade.findById(transmission1.getId());
+        transmission2 = transmissionFacade.findById(transmission2.getId());
+    }
 
 
-	
-	private TransmissionDTO getTransmissionHelper(String name) {
-		TransmissionDTO transmissionDTO = new TransmissionDTO();
-		transmissionDTO.setName(name);
-		return transmissionDTO;
-	}
+    @After
+    public void deleteTransmissions() {
+        if (transmissionFacade.findAll().contains(transmission1)) {
+            transmissionFacade.remove(transmission1);
+            assertFalse(transmissionFacade.findAll().contains(transmission1));
+        }
+
+        if (transmissionFacade.findAll().contains(transmission2)) {
+            transmissionFacade.remove(transmission2);
+            assertFalse(transmissionFacade.findAll().contains(transmission2));
+        }
+
+        if (transmissionFacade.findAll().contains(newTransmission)) {
+            transmissionFacade.remove(newTransmission);
+            assertFalse(transmissionFacade.findAll().contains(newTransmission));
+        }
+    }
+
+    @Test
+    public void shouldCreateTransmission() throws Exception {
+        transmissionFacade.create(newTransmission);
+        assertEquals(transmissionFacade.findById(newTransmission.getId()), newTransmission);
+        assertTrue(transmissionFacade.findAll().contains(newTransmission));
+    }
+
+    @Test
+    public void shouldFindByTransmissionId() throws Exception {
+        assertEquals(transmissionFacade.findById(transmission1.getId()), transmission1);
+        assertEquals(transmissionFacade.findById(transmission2.getId()), transmission2);
+    }
+
+    @Test
+    public void shouldFindByTransmissionName() throws Exception {
+        assertEquals(transmissionFacade.findByName(transmission1.getName()), transmission1);
+        assertEquals(transmissionFacade.findByName(transmission2.getName()), transmission2);
+    }
+
+    @Test(expected = DataAccessException.class)
+    public void findByTransmissionNameNonExisting() {
+        transmissionFacade.findByName("non-existing");
+    }
+
+    @Test
+    public void shouldFindAllTransmissions() throws Exception {
+        assertTrue(transmissionFacade.findAll().contains(transmission1));
+        assertTrue(transmissionFacade.findAll().contains(transmission2));
+        assertEquals(transmissionFacade.findAll().size(), 2);
+    }
+
+    @Test
+    public void shouldUpdateTransmission() throws Exception {
+        transmission1.setName("tran");
+        //logger.info("Transmission id: " + transmission1.getId());
+        transmissionFacade.update(transmission1);
+        assertEquals(transmissionFacade.findAll().size(), 2);
+        assertEquals(transmissionFacade.findById(transmission1.getId()), transmission1);
+    }
+
+    @Test
+    public void shouldDeleteTransmission() throws Exception {
+        assertNotNull(transmissionFacade.findById(transmission1.getId()));
+        transmissionFacade.remove(transmission1);
+        assertFalse(transmissionFacade.findAll().contains(transmission1));
+    }
+
+
+    private TransmissionDTO getTransmissionHelper(String name) {
+        TransmissionDTO transmissionDTO = new TransmissionDTO();
+        transmissionDTO.setName(name);
+        return transmissionDTO;
+    }
 }

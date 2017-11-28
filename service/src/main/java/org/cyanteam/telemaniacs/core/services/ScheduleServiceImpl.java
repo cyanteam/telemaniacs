@@ -5,7 +5,6 @@ import org.cyanteam.telemaniacs.core.entities.Channel;
 import org.cyanteam.telemaniacs.core.entities.TransmissionOccurrence;
 import org.springframework.stereotype.Service;
 
-import javax.inject.Inject;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
@@ -13,12 +12,11 @@ import java.util.stream.Collectors;
 
 /**
  * TV schedule service implementation
+ *
  * @author Michael Le
  */
 @Service
 public class ScheduleServiceImpl implements ScheduleService {
-    @Inject
-    private ChannelService channelService;
 
     @Override
     public Schedule getSchedule(Collection<Channel> channels, LocalDateTime start, LocalDateTime end) {

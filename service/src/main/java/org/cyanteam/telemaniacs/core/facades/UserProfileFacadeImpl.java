@@ -43,7 +43,7 @@ public class UserProfileFacadeImpl implements UserProfileFacade {
 
     @Override
     public void followChannel(Long userId, Long channelId) {
-        User user = userService.findUserById(userId);
+        User user = userService.findById(userId);
         Channel channel = channelService.findById(channelId);
 
         favoriteChannelsService.followChannel(channel, user);
@@ -51,7 +51,7 @@ public class UserProfileFacadeImpl implements UserProfileFacade {
 
     @Override
     public void unfollowChannel(Long userId, Long channelId) {
-        User user = userService.findUserById(userId);
+        User user = userService.findById(userId);
         Channel channel = channelService.findById(channelId);
 
         favoriteChannelsService.unfollowChannel(channel, user);
@@ -59,7 +59,7 @@ public class UserProfileFacadeImpl implements UserProfileFacade {
 
     @Override
     public List<ChannelDTO> getFavoriteChannels(Long userId) {
-        User user = userService.findUserById(userId);
+        User user = userService.findById(userId);
         List<Channel> channels = favoriteChannelsService.getFavoriteChannels(user);
 
         return mapper.map(channels, ChannelDTO.class);
@@ -67,23 +67,23 @@ public class UserProfileFacadeImpl implements UserProfileFacade {
 
     @Override
     public void followTransmission(Long userId, Long transmissionId) {
-        User user = userService.findUserById(userId);
-        Transmission transmission = transmissionService.getTransmissionById(transmissionId);
+        User user = userService.findById(userId);
+        Transmission transmission = transmissionService.findById(transmissionId);
 
         favoriteTransmissionsService.followTransmission(transmission, user);
     }
 
     @Override
     public void unfollowTransmission(Long userId, Long transmissionId) {
-        User user = userService.findUserById(userId);
-        Transmission transmission = transmissionService.getTransmissionById(transmissionId);
+        User user = userService.findById(userId);
+        Transmission transmission = transmissionService.findById(transmissionId);
 
         favoriteTransmissionsService.unfollowTransmission(transmission, user);
     }
 
     @Override
     public List<TransmissionDTO> getFavoriteTransmissionsByUser(Long userId) {
-        User user = userService.findUserById(userId);
+        User user = userService.findById(userId);
         List<Transmission> transmissions = favoriteTransmissionsService.getFavoriteTransmissionsByUser(user);
 
         return mapper.map(transmissions, TransmissionDTO.class);
@@ -91,7 +91,7 @@ public class UserProfileFacadeImpl implements UserProfileFacade {
 
     @Override
     public List<TransmissionDTO> getUpcomingFavoriteTransmissionsByUser(Long userId, int maxTimeSpan) {
-        User user = userService.findUserById(userId);
+        User user = userService.findById(userId);
         List<Transmission> transmissions
                 = favoriteTransmissionsService.getUpcomingFavoriteTransmissionsByUser(user, Duration.ofSeconds(maxTimeSpan));
 
@@ -100,12 +100,12 @@ public class UserProfileFacadeImpl implements UserProfileFacade {
 
     @Override
     public void vote(Long userId, Long transmissionId, UserVotingDto userVoting) {
-        User user = userService.findUserById(userId);
-        Transmission transmission = transmissionService.getTransmissionById(transmissionId);
+        User user = userService.findById(userId);
+        Transmission transmission = transmissionService.findById(transmissionId);
 
         Voting voting;
         try {
-            voting = votingService.getVotingByUser(user).stream()
+            voting = votingService.findByUser(user).stream()
                     .filter(v -> v.getTransmission().equals(transmission))
                     .findFirst().orElse(new Voting());
         } catch (Exception e) {
@@ -114,23 +114,23 @@ public class UserProfileFacadeImpl implements UserProfileFacade {
         setVoting(voting, user, transmission, userVoting);
 
         if (voting.getId() == null) {
-            votingService.createVoting(voting);
+            votingService.create(voting);
             return;
         }
 
-        votingService.updateVoting(voting);
+        votingService.update(voting);
     }
 
     @Override
     public void removeVoting(Long votingId) {
-        Voting voting = votingService.getVotingById(votingId);
-        votingService.removeVoting(voting);
+        Voting voting = votingService.findById(votingId);
+        votingService.remove(voting);
     }
 
     @Override
     public List<VotingDTO> getVotingsByUser(Long userId) {
-        User user = userService.findUserById(userId);
-        List<Voting> votings = votingService.getVotingByUser(user);
+        User user = userService.findById(userId);
+        List<Voting> votings = votingService.findByUser(user);
 
         return mapper.map(votings, VotingDTO.class);
     }

@@ -23,25 +23,27 @@ import java.util.List;
 @Transactional
 public class ScheduleFacadeImpl implements ScheduleFacade {
 
-	@Inject
-	private ScheduleService scheduleService;
+    @Inject
+    private ScheduleService scheduleService;
 
-	@Inject
-	private ObjectMapperService objectMapperService;
+    @Inject
+    private ObjectMapperService objectMapperService;
 
-	@Override
-	public ScheduleDTO getSchedule(Collection<ChannelDTO> channels, LocalDateTime start, LocalDateTime end) {
-		Schedule schedule;
-		schedule = scheduleService.getSchedule(objectMapperService.map(channels, Channel.class), start, end);
-		return objectMapperService.map(schedule, ScheduleDTO.class);
-	}
+    @Override
+    public ScheduleDTO getSchedule(Collection<ChannelDTO> channels, LocalDateTime start, LocalDateTime end) {
+        Schedule schedule;
+        schedule = scheduleService.getSchedule(objectMapperService.map(channels, Channel.class), start, end);
 
-	@Override
-	public ScheduleDTO getUserSchedule(UserDTO user, LocalDateTime from, LocalDateTime to) {
-		Schedule schedule;
-		schedule = scheduleService.getSchedule(objectMapperService.map(user.getFavouriteChannels(), Channel.class), from, to);
-		return objectMapperService.map(schedule, ScheduleDTO.class);
-	}
+        return objectMapperService.map(schedule, ScheduleDTO.class);
+    }
+
+    @Override
+    public ScheduleDTO getUserSchedule(UserDTO user, LocalDateTime from, LocalDateTime to) {
+        Schedule schedule;
+        schedule = scheduleService.getSchedule(objectMapperService.map(user.getFavouriteChannels(), Channel.class), from, to);
+
+        return objectMapperService.map(schedule, ScheduleDTO.class);
+    }
 
 
 }

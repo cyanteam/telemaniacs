@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @ContextConfiguration(classes = ServiceContextConfiguration.class)
 @RunWith(SpringJUnit4ClassRunner.class)
-public class DozerObjectMapperServiceTest {
+public class DozerObjectMapperServiceImplTest {
     @Inject
     private ObjectMapperService objectMapperService;
 

@@ -32,6 +32,7 @@ import static org.mockito.Mockito.when;
 
 /**
  * Tests for user profile facade
+ *
  * @author Michael Le
  */
 @ContextConfiguration(classes = ServiceContextConfiguration.class)
@@ -82,11 +83,11 @@ public class UserProfileFacadeImplTest {
         votingWithoutId = createTestVoting(user, transmission);
         votingWithoutId.setId(null);
 
-        when(userService.findUserById(user.getId()))
+        when(userService.findById(user.getId()))
                 .thenReturn(user);
         when(channelService.findById(channel.getId()))
                 .thenReturn(channel);
-        when(transmissionService.getTransmissionById(transmission.getId()))
+        when(transmissionService.findById(transmission.getId()))
                 .thenReturn(transmission);
         when(favoriteChannelsService.getFavoriteChannels(user))
                 .thenReturn(createList(channel));
@@ -94,17 +95,17 @@ public class UserProfileFacadeImplTest {
                 .thenReturn(createList(transmission));
         when(favoriteTransmissionsService.getUpcomingFavoriteTransmissionsByUser(eq(user), any()))
                 .thenReturn(createList(transmission));
-        when(votingService.getVotingById(voting.getId()))
+        when(votingService.findById(voting.getId()))
                 .thenReturn(voting);
-        when(votingService.getVotingByUser(user))
+        when(votingService.findByUser(user))
                 .thenReturn(createList(voting));
     }
 
     @Test
     public void followChannelTest() {
-        when(userService.findUserById(any()))
+        when(userService.findById(any()))
                 .thenReturn(user);
-        User u = userService.findUserById(user.getId());
+        User u = userService.findById(user.getId());
 
         userProfileFacade.followChannel(user.getId(), channel.getId());
         verify(favoriteChannelsService).followChannel(channel, user);
@@ -156,10 +157,10 @@ public class UserProfileFacadeImplTest {
     @Test
     public void voteCreateTest() {
         UserVotingDto userVoting = createUserVoting();
-        when(votingService.getVotingByUser(user)).thenReturn(createList());
+        when(votingService.findByUser(user)).thenReturn(createList());
 
         userProfileFacade.vote(user.getId(), transmission.getId(), userVoting);
-        verify(votingService).createVoting(argThat(new ArgumentMatcher<Voting>() {
+        verify(votingService).create(argThat(new ArgumentMatcher<Voting>() {
             @Override
             public boolean matches(Object argument) {
                 Voting voting = (Voting) argument;
@@ -174,10 +175,10 @@ public class UserProfileFacadeImplTest {
     @Test
     public void voteUpdateTest() {
         UserVotingDto userVoting = createUserVoting();
-        when(votingService.getVotingByUser(user)).thenReturn(createList(voting));
+        when(votingService.findByUser(user)).thenReturn(createList(voting));
 
         userProfileFacade.vote(user.getId(), transmission.getId(), userVoting);
-        verify(votingService).updateVoting(argThat(new ArgumentMatcher<Voting>() {
+        verify(votingService).update(argThat(new ArgumentMatcher<Voting>() {
             @Override
             public boolean matches(Object argument) {
                 Voting voting = (Voting) argument;
@@ -192,13 +193,13 @@ public class UserProfileFacadeImplTest {
     @Test
     public void removeVotingTest() {
         userProfileFacade.removeVoting(voting.getId());
-        verify(votingService).removeVoting(voting);
+        verify(votingService).remove(voting);
     }
 
     @Test
     public void getVotingsByUserTest() {
         List<VotingDTO> votings = userProfileFacade.getVotingsByUser(user.getId());
-        verify(votingService).getVotingByUser(user);
+        verify(votingService).findByUser(user);
 
         VotingDTO votingDto = votings.get(0);
         checkVotingMapping(votingDto, voting);

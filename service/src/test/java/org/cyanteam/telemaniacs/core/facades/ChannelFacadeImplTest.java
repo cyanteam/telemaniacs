@@ -24,12 +24,11 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
- *
  * @author Tomas Milota
  */
 @ContextConfiguration(classes = ServiceContextConfiguration.class)
 @RunWith(SpringJUnit4ClassRunner.class)
-public class ChannelFacadeTest {
+public class ChannelFacadeImplTest {
 
     @Inject
     @Spy
@@ -61,19 +60,19 @@ public class ChannelFacadeTest {
 
     @Test
     public void createChannelTest() {
-        channelFacade.createChannel(channelDTO);
+        channelFacade.create(channelDTO);
         verify(channelService).create(argThat(getChannelMatcher()));
     }
 
     @Test
     public void updateChannelTest() {
-        channelFacade.updateChannel(channelDTO);
+        channelFacade.update(channelDTO);
         verify(channelService).update(argThat(getChannelMatcher()));
     }
 
     @Test
     public void removeChannelTest() {
-        channelFacade.removeChannel(channelDTO);
+        channelFacade.remove(channelDTO);
         verify(channelService).remove(argThat(getChannelMatcher()));
     }
 
@@ -81,7 +80,7 @@ public class ChannelFacadeTest {
     public void findChannelByIdTest() {
         when(channelService.findById(1L)).thenReturn(channelEntity);
 
-        ChannelDTO result = channelFacade.findChannelById(1L);
+        ChannelDTO result = channelFacade.findById(1L);
         verify(channelService).findById(1L);
         assertThat(result).isEqualToComparingFieldByFieldRecursively(channelDTO);
     }
@@ -90,7 +89,7 @@ public class ChannelFacadeTest {
     public void findChannelByNameTest() {
         when(channelService.findByName("hbo")).thenReturn(channelEntity);
 
-        ChannelDTO result = channelFacade.findChannelByName("hbo");
+        ChannelDTO result = channelFacade.findByName("hbo");
         verify(channelService).findByName("hbo");
         assertThat(result).isEqualToComparingFieldByFieldRecursively(channelDTO);
     }
@@ -100,7 +99,7 @@ public class ChannelFacadeTest {
         when(channelService.getChannelsByType(ChannelType.MOVIE))
                 .thenReturn(createList(channelEntity));
 
-        List<ChannelDTO> result = channelFacade.findChannelsByType(ChannelType.MOVIE);
+        List<ChannelDTO> result = channelFacade.findAllOfType(ChannelType.MOVIE);
         verify(channelService).getChannelsByType(ChannelType.MOVIE);
         assertThat(result).containsExactly(channelDTO);
     }
@@ -110,7 +109,7 @@ public class ChannelFacadeTest {
         when(channelService.findAll())
                 .thenReturn(createList(channelEntity));
 
-        List<ChannelDTO> result = channelFacade.findAllChannels();
+        List<ChannelDTO> result = channelFacade.findAll();
         verify(channelService).findAll();
         assertThat(result).containsExactly(channelDTO);
     }

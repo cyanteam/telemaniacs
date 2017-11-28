@@ -7,6 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 import java.util.List;
+
 import org.hibernate.service.spi.ServiceException;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,18 +32,19 @@ import org.cyanteam.telemaniacs.core.utils.TvManagerDataAccessException;
 
 /**
  * Tests for class VotingServiceImpl.
+ *
  * @author Miroslav Kubus
  */
 @ContextConfiguration(classes = ServiceContextConfiguration.class)
 @RunWith(SpringJUnit4ClassRunner.class)
 public class VotingServiceImplTest {
-    
+
     @Mock
     private VotingDao votingDao;
-    
+
     @InjectMocks
     private final VotingService votingService = new VotingServiceImpl();
-    
+
     private final VotingBuilder votingBuilder = new VotingBuilder();
     private Voting badVoting;
     private User youngUser;
@@ -50,11 +52,11 @@ public class VotingServiceImplTest {
     private Transmission sportTransmission;
     private Voting mediumVoting;
     private Voting goodVoting;
-    
+
     @Before
     public void setup() throws ServiceException {
         MockitoAnnotations.initMocks(this);
-        
+
         adultUser = UserBuilder
                 .sampleAdultUserBuilder()
                 .build();
@@ -79,164 +81,164 @@ public class VotingServiceImplTest {
                 .user(youngUser)
                 .transmission(sportTransmission)
                 .build();
-        
+
         votingDao.create(mediumVoting);
         votingDao.create(goodVoting);
     }
-    
+
     @Before
     public void initMocks() {
         doAnswer((Answer<Object>) (InvocationOnMock invocation) -> {
             Object argument = invocation.getArguments()[0];
-            if(argument == null) {
+            if (argument == null) {
                 throw new IllegalArgumentException();
             }
-            
+
             Voting voting = (Voting) argument;
-            if(voting.getId() != null){
+            if (voting.getId() != null) {
                 throw new IllegalArgumentException();
             }
-            
-            voting.setId(Long.valueOf(1));
+
+            voting.setId(1L);
             return null;
         }).when(votingDao).create(any(Voting.class));
-        
+
         doAnswer((Answer<Object>) (InvocationOnMock invocation) -> {
             Object argument = invocation.getArguments()[0];
-            if(argument == null) {
+            if (argument == null) {
                 throw new IllegalArgumentException();
             }
-            
+
             Voting voting = (Voting) argument;
-            if(voting.getId() == null){
+            if (voting.getId() == null) {
                 throw new IllegalArgumentException();
             }
-            
+
             return null;
         }).when(votingDao).remove(any(Voting.class));
-        
+
         doAnswer((Answer<Object>) (InvocationOnMock invocation) -> {
             Object argument = invocation.getArguments()[0];
-            if(argument == null) {
+            if (argument == null) {
                 throw new IllegalArgumentException();
             }
-            
+
             Voting voting = (Voting) argument;
-            if(voting.getId() == null || voting.getIpAddress() == null){
+            if (voting.getId() == null || voting.getIpAddress() == null) {
                 throw new IllegalArgumentException();
             }
-            
-            if(voting.getRank() < 0 || voting.getRank() > 5) {
+
+            if (voting.getRank() < 0 || voting.getRank() > 5) {
                 throw new IllegalArgumentException();
             }
-            
+
             return null;
         }).when(votingDao).update(any(Voting.class));
-        
+
         when(votingDao.findByTransmission(sportTransmission))
-            .thenReturn(Arrays.asList(mediumVoting, goodVoting));
-        
+                .thenReturn(Arrays.asList(mediumVoting, goodVoting));
+
         when(votingDao.findByUser(youngUser))
-            .thenReturn(Arrays.asList(badVoting, mediumVoting, goodVoting));
-        
+                .thenReturn(Arrays.asList(badVoting, mediumVoting, goodVoting));
+
         when(votingDao.findByUser(adultUser))
-            .thenReturn(null);
-        
-        when(votingDao.findById(Long.valueOf(1)))
-            .thenReturn(mediumVoting);
-        
+                .thenReturn(null);
+
+        when(votingDao.findById(1L))
+                .thenReturn(mediumVoting);
+
         when(votingDao.findAll())
-            .thenReturn(Arrays.asList(badVoting, mediumVoting, goodVoting));
+                .thenReturn(Arrays.asList(badVoting, mediumVoting, goodVoting));
     }
-    
+
     @Test
-    public void getByIdTest() throws TvManagerDataAccessException{
-        Voting voting = votingService.getVotingById(Long.valueOf(1));
-        
+    public void getByIdTest() throws TvManagerDataAccessException {
+        Voting voting = votingService.findById(1L);
+
         assertThat(voting).isNotNull();
         assertThat(voting).isEqualToComparingFieldByField(mediumVoting);
     }
-    
+
     @Test(expected = IllegalArgumentException.class)
-    public void getByIdNullTest() throws TvManagerDataAccessException{
-        votingService.getVotingById(null);
+    public void getByIdNullTest() throws TvManagerDataAccessException {
+        votingService.findById(null);
     }
-    
+
     @Test
-    public void getByUserTest() throws TvManagerDataAccessException{
-        List<Voting> votings = votingService.getVotingByUser(youngUser);
-        
+    public void getByUserTest() throws TvManagerDataAccessException {
+        List<Voting> votings = votingService.findByUser(youngUser);
+
         assertThat(votings).isNotNull();
         assertThat(votings.size()).isEqualTo(3);
         assertThat(votings).containsSequence(badVoting, mediumVoting, goodVoting);
     }
-    
+
     @Test(expected = IllegalArgumentException.class)
-    public void getByNullUserTest() throws TvManagerDataAccessException{
-        votingService.getVotingByUser(null);
+    public void getByNullUserTest() throws TvManagerDataAccessException {
+        votingService.findByUser(null);
     }
-    
+
     @Test
-    public void getByNonExistingUserTest() throws TvManagerDataAccessException{
-        List<Voting> voting = votingService.getVotingByUser(adultUser);
-        
+    public void getByNonExistingUserTest() throws TvManagerDataAccessException {
+        List<Voting> voting = votingService.findByUser(adultUser);
+
         assertThat(voting).isNull();
     }
-    
+
     @Test
-    public void getByTransmissionTest() throws TvManagerDataAccessException{
-        List<Voting> votings = votingService.getVotingsByTransmission(sportTransmission);
-        
+    public void getByTransmissionTest() throws TvManagerDataAccessException {
+        List<Voting> votings = votingService.findAllByTransmission(sportTransmission);
+
         assertThat(votings).isNotNull();
         assertThat(votings.size()).isEqualTo(2);
         assertThat(votings).containsSequence(mediumVoting, goodVoting);
     }
-    
+
     @Test
-    public void getAllTest() throws TvManagerDataAccessException{
-        List<Voting> votings = votingService.getAllVotings();
-        
+    public void getAllTest() throws TvManagerDataAccessException {
+        List<Voting> votings = votingService.findAll();
+
         assertThat(votings).isNotNull();
         assertThat(votings.size()).isEqualTo(3);
         assertThat(votings).containsSequence(badVoting, mediumVoting, goodVoting);
     }
-    
+
     @Test(expected = IllegalArgumentException.class)
-    public void getByNullTransmissionTest() throws TvManagerDataAccessException{
-        votingService.getVotingsByTransmission(null);
+    public void getByNullTransmissionTest() throws TvManagerDataAccessException {
+        votingService.findAllByTransmission(null);
     }
-    
+
     @Test(expected = IllegalArgumentException.class)
     public void createNullTest() throws TvManagerDataAccessException {
-        votingService.createVoting(null);
+        votingService.create(null);
     }
-    
+
     @Test
     public void createTest() throws TvManagerDataAccessException {
-        votingService.createVoting(badVoting);
-        
+        votingService.create(badVoting);
+
         assertThat(badVoting.getId()).isNotNull();
     }
-    
+
     @Test(expected = TvManagerDataAccessException.class)
     public void createWitSetIdTest() throws TvManagerDataAccessException {
         Voting newVoting = votingBuilder.id(1L).build();
-        
-        votingService.createVoting(newVoting);
+
+        votingService.create(newVoting);
     }
-    
+
     @Test(expected = TvManagerDataAccessException.class)
     public void removeWithIdNullTest() throws TvManagerDataAccessException {
         Voting newVoting = votingBuilder.id(null).build();
 
-        votingService.removeVoting(newVoting);
+        votingService.remove(newVoting);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void removeNullTest() throws TvManagerDataAccessException {
-        votingService.removeVoting(null);
+        votingService.remove(null);
     }
-    
+
     @Test(expected = TvManagerDataAccessException.class)
     public void removeTest() throws TvManagerDataAccessException {
         Voting toBeRemoved = goodVoting;
@@ -246,31 +248,31 @@ public class VotingServiceImplTest {
         assertThat(votingDao.findById(toBeRemoved.getId())).isNotNull();
         assertThat(votingDao.findById(toBeRemoved.getId())).isEqualTo(toBeRemoved);
 
-        votingService.removeVoting(toBeRemoved);
-        votingService.getVotingById(toBeRemoved.getId());
+        votingService.remove(toBeRemoved);
+        votingService.findById(toBeRemoved.getId());
     }
-    
+
     @Test
     public void updateValidTest() throws TvManagerDataAccessException {
         badVoting.setId(Long.MIN_VALUE);
         badVoting.setComment("NewComment");
-        
-        votingService.updateVoting(badVoting);
+
+        votingService.update(badVoting);
     }
-    
+
     @Test(expected = IllegalArgumentException.class)
     public void updateNullTest() throws TvManagerDataAccessException {
-        votingService.updateVoting(null);
+        votingService.update(null);
     }
 
     @Test(expected = TvManagerDataAccessException.class)
     public void updateNullIpAddressTest() throws TvManagerDataAccessException {
         Voting voting = votingBuilder
-                .id(5l)
+                .id(5L)
                 .ipAddress(null)
                 .build();
-        
-        votingService.updateVoting(voting);
+
+        votingService.update(voting);
     }
 
     @Test(expected = TvManagerDataAccessException.class)
@@ -279,24 +281,24 @@ public class VotingServiceImplTest {
                 .id(null)
                 .build();
 
-        votingService.updateVoting(voting);
+        votingService.update(voting);
     }
-    
+
     @Test(expected = TvManagerDataAccessException.class)
     public void updateHigherRankTest() throws TvManagerDataAccessException {
         Voting voting = votingBuilder
                 .rank(100)
                 .build();
 
-        votingService.updateVoting(voting);
+        votingService.update(voting);
     }
-    
+
     @Test(expected = TvManagerDataAccessException.class)
     public void updateLowerRankTest() throws TvManagerDataAccessException {
         Voting voting = votingBuilder
                 .rank(-5)
                 .build();
 
-        votingService.updateVoting(voting);
+        votingService.update(voting);
     }
 }
