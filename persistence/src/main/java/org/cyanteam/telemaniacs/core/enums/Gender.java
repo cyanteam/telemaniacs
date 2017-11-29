@@ -1,9 +1,9 @@
 package org.cyanteam.telemaniacs.core.enums;
 
 /**
- * Enum class for sex of user.
+ * Enum class for gender of user.
  * @author Miroslav Kubus
  */
-public enum Sex {
+public enum Gender {
     MALE, FEMALE
 }
