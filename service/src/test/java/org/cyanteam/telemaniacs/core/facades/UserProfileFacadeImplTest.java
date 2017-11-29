@@ -7,7 +7,7 @@ import org.cyanteam.telemaniacs.core.dto.UserVotingDto;
 import org.cyanteam.telemaniacs.core.dto.VotingDTO;
 import org.cyanteam.telemaniacs.core.entities.*;
 import org.cyanteam.telemaniacs.core.enums.ChannelType;
-import org.cyanteam.telemaniacs.core.enums.Sex;
+import org.cyanteam.telemaniacs.core.enums.Gender;
 import org.cyanteam.telemaniacs.core.facade.UserProfileFacade;
 import org.cyanteam.telemaniacs.core.helpers.TransmissionBuilder;
 import org.cyanteam.telemaniacs.core.services.*;
@@ -210,7 +210,7 @@ public class UserProfileFacadeImplTest {
         user.setId(1L);
         user.setUsername("Jan Novak");
         user.setEmail("jan.novak@gmail.com");
-        user.setSex(Sex.MALE);
+        user.setGender(Gender.MALE);
         user.setAge(22);
         user.setPasswordHash("ABCDE");
 

@@ -2,7 +2,7 @@ package org.cyanteam.telemaniacs.core.dao;
 
 import org.cyanteam.telemaniacs.core.PersistenceContextConfiguration;
 import org.cyanteam.telemaniacs.core.entities.User;
-import org.cyanteam.telemaniacs.core.enums.Sex;
+import org.cyanteam.telemaniacs.core.enums.Gender;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,14 +45,14 @@ public class UserDaoTest {
         user.setUsername("user");
         user.setEmail("user@mail.com");
         user.setAge(20);
-        user.setSex(Sex.MALE);
+        user.setGender(Gender.MALE);
         user.setPasswordHash("passwordHash");
 
         anotherUser = new User();
         anotherUser.setUsername("anotherUser");
         anotherUser.setEmail("anotherUser@mail.com");
         anotherUser.setAge(25);
-        anotherUser.setSex(Sex.FEMALE);
+        anotherUser.setGender(Gender.FEMALE);
         anotherUser.setPasswordHash("passwordHash");
         anotherUser.setAdminRights();
     }
@@ -98,7 +98,7 @@ public class UserDaoTest {
 
     @Test(expected = ConstraintViolationException.class)
     public void createUserWithNullSex() {
-        user.setSex(null);
+        user.setGender(null);
         userDao.create(user);
     }
 
@@ -157,7 +157,7 @@ public class UserDaoTest {
     @Test(expected = ConstraintViolationException.class)
     public void updateUserWithNullSex() {
         userDao.create(user);
-        user.setSex(null);
+        user.setGender(null);
         userDao.update(user);
 
         em.flush();
