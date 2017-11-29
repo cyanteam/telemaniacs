@@ -1,0 +1,381 @@
+body {
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+    background-color: #ffffff;
+}
+
+
+
+/* COMMONS */
+/* Navigation */
+.navbar,
+.navbar-nav > li > a {
+    margin: 0;
+    padding: 0 15px;
+    min-height: 60px;
+    line-height: 60px;
+    font-size: 15px;
+}
+
+.navbar-brand {
+    margin-left: -20px !important;
+    padding-top: 10px;
+}
+
+#navbar a.user {
+    margin-right: 15px;
+    background: #4a4a4a;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+#navbar .dropdown.open a.user {
+    background: #727272;
+}
+
+#navbar .action > a {
+    font-size: 18px;
+}
+
+#navbar .action > a i {
+    width: 30px;
+    padding-top: 17px;
+    font-size: 25px;
+    vertical-align: top;
+    text-align: center;
+}
+
+#navbar .action.notification > a i {
+    color: #fdd835 !important;
+}
+
+#navbar .action.notification > a:hover i {
+    color: #fff59d !important;
+}
+
+#navbar .action > a span.hidden {
+    display: none;
+}
+
+#navbar .dropdown-menu i {
+    margin-right: 5px;
+    width: 18px;
+    text-align: center;
+}
+
+#navbar a.logout {
+    color: #B71C1C;
+    font-weight: bold;
+}
+
+@media (max-width: 992px) {
+    #navbar .action > a span.hidden {
+        display: inline !important;
+    }
+}
+
+
+/* Page Header */
+.page-header {
+    margin: 0;
+    margin-top: 60px !important;
+    padding: 0;
+    border-bottom: 5px #002230 solid;
+    background: linear-gradient(146deg, #073c51, #399b8c);
+}
+
+.page-header h2,
+.page-header .links,
+.page-header .buttons {
+    line-height: 90px;
+}
+
+.page-header h2 {
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    color: rgba(183, 255, 248, .5);
+}
+
+.page-header .links ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.page-header .links li {
+    display: inline-block;
+    margin: 0 12px 0 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.page-header .links li a {
+    padding: 0 5px;
+    font-size: 2.5rem;
+    color: #ffffff;
+}
+
+.page-header .links li a:hover,
+.page-header .links li a.selected {
+    border-bottom: 2px #ffffff solid;
+    text-decoration: none;
+}
+
+.page-header .buttons {
+    float: right;
+}
+
+.page-header .buttons a.btn {
+    background: transparent;
+    border: 2px #ffffff solid;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.page-header .buttons a.btn:hover {
+    background: rgba(255, 255, 255, .2);
+}
+
+.page-header .buttons a.btn .fa-plus {
+    color: #AEEA00;
+}
+
+@media (max-width: 992px) {
+    .page-header {
+        padding: 12px 0;
+    }
+
+    .page-header h2,
+    .page-header .links,
+    .page-header .buttons {
+        line-height: normal;
+    }
+
+    .page-header h2 {
+        margin-bottom: 8px;
+        font-size: 20px;
+    }
+
+    .page-header .links {
+        font-size: 20px;
+    }
+
+    .page-header .buttons {
+        margin-top: 8px;
+    }
+}
+
+
+/* SCHEDULE */
+/* Date Picker */
+#pick-date {
+    margin: 0;
+    line-height: 45px;
+    border-bottom: 1px #80deea solid;
+    background-color: #e0f7fa;
+    font-size: 22px;
+    text-align: center;
+    color: #002230;
+}
+
+#pick-date a {
+    vertical-align: top;
+    color: #0097a7;
+}
+
+#pick-date a:hover {
+    color: #006064;
+}
+
+
+/* Schedule */
+#schedule-layout header {
+    width: 100%;
+    position: fixed;
+}
+
+#schedule {
+    padding-top: 210px;
+    height: 100%;
+}
+
+#schedule .group {
+    display: flex;
+}
+
+#schedule .column {
+    flex: 0 0 280px;
+    width: 280px;
+    border-right: 1px #e0e0e0 solid;
+}
+
+#schedule .column:last-child {
+    border: 0;
+}
+
+#schedule .column.time-clue {
+    flex: 0 0 80px !important;
+    background-color: #ffffff;
+    font-weight: bold;
+    text-align: right;
+}
+
+#schedule .column.time-clue div {
+    margin-top: 10px;
+    padding-right: 8px;
+}
+
+#schedule .transmission {
+    padding: 8px;
+}
+
+    #schedule .transmission .heading {
+        display: flex;
+        align-items: center;
+    }
+
+        #schedule .transmission .heading .time {
+            flex: 0 0 20%;
+            font-variant: all-small-caps !important;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        #schedule .transmission .heading .options {
+            flex: 0 0 80%;
+            font-size: 18px;
+            text-align: right;
+        }
+
+        #schedule .transmission .heading .options a {
+            color: #01579b;
+        }
+
+        #schedule .transmission .heading .options a:hover {
+            color: #0288d1;
+        }
+
+        #schedule .transmission .heading .options a.follow {
+            color: #ffc400;
+        }
+
+        #schedule .transmission .heading .options a.follow:hover {
+            color: #ffe57f;
+        }
+
+    #schedule .transmission h3 {
+        margin: 8px 0 5px 0;
+        font-size: 18px;
+    }
+
+        #schedule .transmission h3 a {
+            color: #178787;
+        }
+
+        #schedule .transmission h3 a:hover {
+            color: #104c4c;
+        }
+
+    #schedule .transmission .info {
+        display: flex;
+    }
+
+        #schedule .transmission .info .type {
+            flex: 0 0 40%;
+        }
+
+            #schedule .transmission .info .type span {
+                display: inline-block;
+                padding: 1px 4px;
+                background-color: #212121;
+                font-size: 12px;
+                color: #ffffff;
+            }
+
+        #schedule .transmission .info .attributes {
+            flex: 0 0 60%;
+            font-size: 13px;
+            text-align: right;
+            color: #212121;
+        }
+
+    #schedule .transmission .description {
+        margin: 5px 0 0 0;
+        font-size: 14px;
+        color: #424242;
+    }
+
+#schedule .group.channels {
+    height: 100%;
+    background-color: #fafafa;
+}
+
+    #schedule .group.channels .channel {
+        padding: 32px 8px 10px 8px;
+        height: 100%;
+        background-color: #fafafa;
+        border-bottom: 1px #e0e0e0 solid;
+        font-size: 22px;
+        color: #424242;
+    }
+
+    #schedule .group.channels .channel a.follow {
+        float: right;
+        color: #b71c1c;
+    }
+
+#schedule .group.now {
+    height: 100%;
+    background-color: #fff9c4;
+}
+
+    #schedule .group.now .transmission {
+        height: 100%;
+        background-color: #fff9c4;
+    }
+
+        #schedule .group.now .transmission .heading {
+            display: flex;
+            align-items: center;
+        }
+
+            #schedule .group.now .transmission .heading .time {
+                flex: 0 0 70%;
+                color: #f9a825;
+            }
+
+            #schedule .group.now .transmission .heading .status {
+                flex: 0 0 30%;
+            }
+
+            #schedule .group.now .transmission .heading .progress {
+                margin: 0;
+                height: 12px;
+                border: 0;
+                border-radius: 0;
+                box-shadow: none;
+                background-color: #fff176;
+            }
+
+            #schedule .group.now .transmission .heading .progress .progress-bar {
+                border: 0;
+                box-shadow: none;
+                background-color: #f9a825;
+            }
+
+    #schedule .group.now .transmission.followed {
+        height: 100%;
+        background-color: #ffcdd2;
+    }
+
+        #schedule .group.now .transmission.followed .heading .time {
+            color: #c62828;
+        }
+
+        #schedule .group.now .transmission.followed .heading .progress {
+            background-color: #ef9a9a;
+        }
+
+        #schedule .group.now .transmission.followed .heading .progress-bar {
+            background-color: #c62828;
+        }
