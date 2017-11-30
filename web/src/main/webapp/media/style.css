@@ -166,6 +166,7 @@ body {
 }
 
 
+
 /* SCHEDULE */
 /* Date Picker */
 #pick-date {
@@ -194,97 +195,92 @@ body {
     position: fixed;
 }
 
-#schedule {
-    padding-top: 210px;
-    height: 100%;
-}
-
-#schedule .group {
+#schedule-layout main .group {
     display: flex;
 }
 
-#schedule .column {
+#schedule-layout main .column {
     flex: 0 0 280px;
     width: 280px;
     border-right: 1px #e0e0e0 solid;
 }
 
-#schedule .column:last-child {
+#schedule-layout main .column:last-child {
     border: 0;
 }
 
-#schedule .column.time-clue {
+#schedule-layout main .column.time-clue {
     flex: 0 0 80px !important;
     background-color: #ffffff;
     font-weight: bold;
     text-align: right;
 }
 
-#schedule .column.time-clue div {
+#schedule-layout main .column.time-clue div {
     margin-top: 10px;
     padding-right: 8px;
 }
 
-#schedule .transmission {
+#schedule-layout main .transmission {
     padding: 8px;
 }
 
-    #schedule .transmission .heading {
+    #schedule-layout main .transmission .heading {
         display: flex;
         align-items: center;
     }
 
-        #schedule .transmission .heading .time {
+        #schedule-layout main .transmission .heading .time {
             flex: 0 0 20%;
             font-variant: all-small-caps !important;
             font-size: 15px;
             font-weight: bold;
         }
 
-        #schedule .transmission .heading .options {
+        #schedule-layout main .transmission .heading .options {
             flex: 0 0 80%;
             font-size: 18px;
             text-align: right;
         }
 
-        #schedule .transmission .heading .options a {
+        #schedule-layout main .transmission .heading .options a {
             color: #01579b;
         }
 
-        #schedule .transmission .heading .options a:hover {
+        #schedule-layout main .transmission .heading .options a:hover {
             color: #0288d1;
         }
 
-        #schedule .transmission .heading .options a.follow {
+        #schedule-layout main .transmission .heading .options a.follow {
             color: #ffc400;
         }
 
-        #schedule .transmission .heading .options a.follow:hover {
+        #schedule-layout main .transmission .heading .options a.follow:hover {
             color: #ffe57f;
         }
 
-    #schedule .transmission h3 {
+    #schedule-layout main .transmission h3 {
         margin: 8px 0 5px 0;
         font-size: 18px;
     }
 
-        #schedule .transmission h3 a {
+        #schedule-layout main .transmission h3 a {
             color: #178787;
         }
 
-        #schedule .transmission h3 a:hover {
+        #schedule-layout main .transmission h3 a:hover {
             color: #104c4c;
         }
 
-    #schedule .transmission .info {
+    #schedule-layout main .transmission .info {
         display: flex;
     }
 
-        #schedule .transmission .info .type {
+        #schedule-layout main .transmission .info .type {
             flex: 0 0 40%;
         }
 
-            #schedule .transmission .info .type span {
+            #schedule-layout main .transmission .info .type span {
                 display: inline-block;
                 padding: 1px 4px;
                 background-color: #212121;
@@ -292,25 +288,25 @@ body {
                 color: #ffffff;
             }
 
-        #schedule .transmission .info .attributes {
+        #schedule-layout main .transmission .info .attributes {
             flex: 0 0 60%;
             font-size: 13px;
             text-align: right;
             color: #212121;
         }
 
-    #schedule .transmission .description {
+    #schedule-layout main .transmission .description {
         margin: 5px 0 0 0;
         font-size: 14px;
         color: #424242;
     }
 
-#schedule .group.channels {
+#schedule-layout main .group.channels {
     height: 100%;
     background-color: #fafafa;
 }
 
-    #schedule .group.channels .channel {
+    #schedule-layout main .group.channels .channel {
         padding: 32px 8px 10px 8px;
         height: 100%;
         background-color: #fafafa;
@@ -319,36 +315,36 @@ body {
         color: #424242;
     }
 
-    #schedule .group.channels .channel a.follow {
+    #schedule-layout main .group.channels .channel a.follow {
         float: right;
         color: #b71c1c;
     }
 
-#schedule .group.now {
+#schedule-layout main .group.now {
     height: 100%;
     background-color: #fff9c4;
 }
 
-    #schedule .group.now .transmission {
+    #schedule-layout main .group.now .transmission {
         height: 100%;
         background-color: #fff9c4;
     }
 
-        #schedule .group.now .transmission .heading {
+        #schedule-layout main .group.now .transmission .heading {
             display: flex;
             align-items: center;
         }
 
-            #schedule .group.now .transmission .heading .time {
+            #schedule-layout main .group.now .transmission .heading .time {
                 flex: 0 0 70%;
                 color: #f9a825;
             }
 
-            #schedule .group.now .transmission .heading .status {
+            #schedule-layout main .group.now .transmission .heading .status {
                 flex: 0 0 30%;
             }
 
-            #schedule .group.now .transmission .heading .progress {
+            #schedule-layout main .group.now .transmission .heading .progress {
                 margin: 0;
                 height: 12px;
                 border: 0;
@@ -357,25 +353,25 @@ body {
                 background-color: #fff176;
             }
 
-            #schedule .group.now .transmission .heading .progress .progress-bar {
+            #schedule-layout main .group.now .transmission .heading .progress .progress-bar {
                 border: 0;
                 box-shadow: none;
                 background-color: #f9a825;
             }
 
-    #schedule .group.now .transmission.followed {
+    #schedule-layout main .group.now .transmission.followed {
         height: 100%;
         background-color: #ffcdd2;
     }
 
-        #schedule .group.now .transmission.followed .heading .time {
+        #schedule-layout main .group.now .transmission.followed .heading .time {
             color: #c62828;
         }
 
-        #schedule .group.now .transmission.followed .heading .progress {
+        #schedule-layout main .group.now .transmission.followed .heading .progress {
             background-color: #ef9a9a;
         }
 
-        #schedule .group.now .transmission.followed .heading .progress-bar {
+        #schedule-layout main .group.now .transmission.followed .heading .progress-bar {
             background-color: #c62828;
         }
