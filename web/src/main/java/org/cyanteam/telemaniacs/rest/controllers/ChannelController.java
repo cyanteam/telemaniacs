@@ -13,7 +13,7 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping(Url.channel)
+@RequestMapping(Url.CHANNEL)
 public class ChannelController {
     @Inject
     private ChannelFacade channelFacade;
