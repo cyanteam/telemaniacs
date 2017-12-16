@@ -16,5 +16,16 @@ telemaniacsApp.config(function($routeProvider) {
             edit: true
         })
 
+        .when('/admin/transmissions/create', {
+            controller: 'TransmissionsCreateController',
+            templateUrl: 'app/transmission/edit.html'
+        })
+
+        .when('/admin/transmissions/edit/:id', {
+            controller: 'TransmissionsCreateController',
+            templateUrl: 'app/transmission/edit.html',
+            edit: true
+        })
+
         .otherwise({ redirectTo: '/schedule' });
 });

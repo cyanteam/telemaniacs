@@ -119,4 +119,6 @@ public interface TransmissionService {
      * @return Average voting of given transmission, or null if no voting available
      */
     Double getAverageVoting(Transmission transmission);
+
+    TransmissionOccurrence getOccurranceById(Long id)throws IllegalArgumentException;
 }

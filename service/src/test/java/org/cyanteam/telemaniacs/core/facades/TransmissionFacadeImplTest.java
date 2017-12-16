@@ -1,6 +1,8 @@
 package org.cyanteam.telemaniacs.core.facades;
 
 import javax.inject.Inject;
+
+import org.cyanteam.telemaniacs.core.dto.TransmissionCreateDTO;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -61,7 +63,7 @@ public class TransmissionFacadeImplTest {
 
     @Test
     public void shouldCreateTransmission() throws Exception {
-        TransmissionDTO transmissionDTO = new TransmissionDTO();
+        TransmissionCreateDTO transmissionDTO = new TransmissionCreateDTO();
         transmissionDTO.setName("Create transmission");
         
         transmissionFacade.create(transmissionDTO);

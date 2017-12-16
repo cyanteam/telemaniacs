@@ -34,6 +34,7 @@
 
     <script src="app/schedule/controller.js"></script>
     <script src="app/channels/controller.js"></script>
+    <script src="app/transmission/controller.js"></script>
 </body>
 
 </html>

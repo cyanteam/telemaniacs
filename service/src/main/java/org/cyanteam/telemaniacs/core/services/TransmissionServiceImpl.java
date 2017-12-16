@@ -113,4 +113,9 @@ public class TransmissionServiceImpl implements TransmissionService {
                 .collect(Collectors.toList());
         return statisticsService.average(ranks);
     }
+
+    @Override
+    public TransmissionOccurrence getOccurranceById(Long id) throws IllegalArgumentException {
+        return transmissionOccurrenceDao.findById(id);
+    }
 }
