@@ -15,6 +15,11 @@ telemaniacsApp.config(function($routeProvider) {
             templateUrl: 'app/channels/edit.html',
             edit: true
         })
+        
+        .when('/admin/channels', {
+            controller: 'ChannelsListController',
+            templateUrl: 'app/channels/list.html'
+        })
 
         .when('/admin/transmissions/create', {
             controller: 'TransmissionsCreateController',

@@ -8,6 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css" />
     <link rel="stylesheet" href="media/style.css" />
@@ -35,6 +36,7 @@
     <script src="app/schedule/controller.js"></script>
     <script src="app/channels/controller.js"></script>
     <script src="app/transmission/controller.js"></script>
+    <script src="app/channels/channelsListController.js"></script>
 </body>
 
 </html>

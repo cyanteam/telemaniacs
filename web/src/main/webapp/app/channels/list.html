@@ -1,0 +1,32 @@
+<main ng-controller='ChannelsListController'>
+    <div class="container">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Channel name</th>
+                        <th>Channel type</th>
+                        <th>Language</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="channel in channels">
+                        <td>{{ $index + 1}}</td>
+                        <td>{{ channel.name}}</td>
+                        <td>{{ channel.channelType}}</td>
+                        <td>{{ channel.language}}</td>
+                        <td>
+                            <span class="glyphicon glyphicon-trash"
+                                  style="cursor:pointer; color:red;"
+                                  title="Delete channel"
+                                  ng-click="delete(channel)"
+                            />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
