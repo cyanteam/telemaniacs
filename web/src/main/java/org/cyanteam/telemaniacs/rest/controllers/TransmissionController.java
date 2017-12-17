@@ -69,6 +69,18 @@ public class TransmissionController {
 		return transmissionFacade.update(transmissionDTO);
 	}
 
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public final void deleteTransmission(@PathVariable("id") long id) throws Exception {
+		log.debug("rest deleteTransmission({})", id);
+
+		TransmissionDTO transmissionDTO = transmissionFacade.findById(id);
+		if (transmissionDTO == null) {
+			throw new ResourceNotFoundException("Transmission", id);
+		}
+
+		transmissionFacade.remove(transmissionDTO);
+	}
+
 	/**
 	 * Retrieves transmission with specific ID
 	 *
@@ -109,6 +121,18 @@ public class TransmissionController {
 		}
 
 		return transmissions;
+	}
+
+	/**
+	 * Produces list of all transmissions in JSON.
+	 *
+	 * @return list of transmissions
+	 */
+	@RequestMapping(method = RequestMethod.GET)
+	public List<TransmissionDTO> getAllTransmissions() {
+		log.debug("rest getAllTransmissions()");
+
+		return transmissionFacade.findAll();
 	}
 
 	@RequestMapping(value = "/occurrence/add", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
