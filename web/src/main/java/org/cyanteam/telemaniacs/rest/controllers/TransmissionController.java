@@ -3,8 +3,10 @@ package org.cyanteam.telemaniacs.rest.controllers;
 import org.cyanteam.telemaniacs.core.dto.TransmissionCreateDTO;
 import org.cyanteam.telemaniacs.core.dto.TransmissionDTO;
 import org.cyanteam.telemaniacs.core.dto.TransmissionOccurrenceDTO;
+import org.cyanteam.telemaniacs.core.dto.VotingDTO;
 import org.cyanteam.telemaniacs.core.enums.TransmissionType;
 import org.cyanteam.telemaniacs.core.facade.TransmissionFacade;
+import org.cyanteam.telemaniacs.core.facade.UserProfileFacade;
 import org.cyanteam.telemaniacs.rest.exceptions.ResourceNotFoundException;
 import org.cyanteam.telemaniacs.rest.exceptions.ValidationException;
 import org.slf4j.Logger;
@@ -27,6 +29,8 @@ public class TransmissionController {
 
 	@Inject
 	private TransmissionFacade transmissionFacade;
+	@Inject
+	private UserProfileFacade userProfileFacade;
 
 	private final static Logger log = LoggerFactory.getLogger(TransmissionController.class);
 
@@ -136,6 +140,16 @@ public class TransmissionController {
 		return transmissionFacade.findAll();
 	}
 
+	@RequestMapping(value = "/{transmissionId}/follow/{userId}", method = RequestMethod.POST)
+	public void followTransmission(@PathVariable("transmissionId") long transmissionId, @PathVariable("userId") long userId) {
+		userProfileFacade.followTransmission(userId, transmissionId);
+	}
+
+	@RequestMapping(value = "/{transmissionId}/unfollow/{userId}", method = RequestMethod.POST)
+	public void unfollowTransmission(@PathVariable("transmissionId") long transmissionId, @PathVariable("userId") long userId) {
+		userProfileFacade.unfollowTransmission(userId, transmissionId);
+	}
+
 	@RequestMapping(value = "/occurrence/add", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public TransmissionOccurrenceDTO createOccurrence(@RequestBody @Valid TransmissionOccurrenceDTO occurenceDTO,
 	                                               BindingResult bindingResult) {
@@ -173,5 +187,25 @@ public class TransmissionController {
 
 		transmissionFacade.removeOccurrence(occurrenceDTO);
 		return occurrenceDTO;
+	}
+
+	@RequestMapping(value = "/{id}/votings", method = RequestMethod.GET)
+	public List<VotingDTO> getVotings(@PathVariable("id") long id) {
+		TransmissionDTO transmissionDTO = transmissionFacade.findById(id);
+		if (transmissionDTO == null) {
+			throw new ResourceNotFoundException("Transmission", id);
+		}
+
+		return transmissionFacade.getVotings(transmissionDTO);
+	}
+
+	@RequestMapping(value = "/{id}/rank", method = RequestMethod.GET)
+	public Double getAverageRank(@PathVariable("id") long id) {
+		TransmissionDTO transmissionDTO = transmissionFacade.findById(id);
+		if (transmissionDTO == null) {
+			throw new ResourceNotFoundException("Transmission", id);
+		}
+
+		return transmissionFacade.getAverageVoting(transmissionDTO);
 	}
 }
