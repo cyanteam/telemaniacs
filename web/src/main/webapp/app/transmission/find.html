@@ -1,6 +1,6 @@
-<main>
-    <div class="container">
-        <h2>
+<main class="container">
+    <div>
+        <h2 class="left">
             <span>Search by name</span>
         </h2>
 
@@ -8,18 +8,20 @@
             <div class="form-group" ng-class="{ 'has-error': !(form.name.$valid) }">
                 <label for="name" class="control-label col-sm-2">Name</label>
                 <div class="col-sm-5">
-                    <input ng-model="searchName" id="name" name="name" type="text" class="form-control" required/>
+                    <input  ng-keydown="$event.keyCode === 13 && form.name.$valid && findByName(searchName)" 
+                            ng-model="searchName" id="name" name="name" type="text" 
+                            class="form-control" required/>
                     <p ng-show="form.name.$error.required" class="help-block">Name is required.</p>
                 </div>
                 <div class="col-sm-5">
-                    <button ng-click="findByName(searchName)" ng-disabled="!form.name.$valid" class="btn btn-primary" type="submit">
+                    <button ng-click="findByName(searchName)" ng-disabled="!form.name.$valid" class="btn btn-primary" type="button">
                         <i class="fa fa-search"></i> Search by name
                     </button>
                 </div>
         </form>
     </div>
-    <div class="container">
-        <h2>
+    <div>
+        <h2 class="left">
             <span>Search by type</span>
         </h2>
         <form name="typeForm" class="form-horizontal" novalidate>
@@ -44,7 +46,7 @@
         <strong>No result found!</strong> No data which fulfills your criteria were found.
     </div>
     <div class="container" ng-if="noData === false">
-      <table class="table">
+        <table class="table">
             <thead>
                 <tr>
                     <th>#</th>
@@ -69,6 +71,6 @@
                     </td>
                 </tr>
             </tbody>
-      </table>
+        </table>
     </div>
 </main>

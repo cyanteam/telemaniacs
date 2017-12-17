@@ -100,7 +100,6 @@ telemaniacsApp.controller('TransmissionsFindController', [
     'PageService',
     
     function ($scope, pageService) {
-        console.log('TransmissionFindController');
         pageService.consumeMessages();
         pageService.setPageName('Find Show');
         
@@ -110,10 +109,9 @@ telemaniacsApp.controller('TransmissionsFindController', [
         $scope.channelTypes = [
             { id: 'MOVIE', name: 'Movie' },
             { id: 'DOCUMENTARY', name: 'Documentary' },
-            { id: 'COMMERCE', name: 'Commerce' },
-            { id: 'MUSIC', name: 'Music' },
-            { id: 'SPORT', name: 'Sport' },
-            { id: 'CHILDREN', name: 'Children' }
+            { id: 'TV_SERIES', name: 'TV Series' },
+            { id: 'SPORT_EVENT', name: 'Sport' },
+            { id: 'TV_SHOW', name: 'TV Show' },
         ];
         
         $scope.findByName = function (name) {           
@@ -128,7 +126,7 @@ telemaniacsApp.controller('TransmissionsFindController', [
                 $scope.transmissions = [transmission];
                 $scope.noData = false;
                 console.log($scope.transmissions);
-            })
+            });
         };
         
         $scope.findByType = function (type) {
