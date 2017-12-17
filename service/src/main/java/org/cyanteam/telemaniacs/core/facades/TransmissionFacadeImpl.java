@@ -65,7 +65,6 @@ public class TransmissionFacadeImpl implements TransmissionFacade {
         }
 
         Transmission transmission = transmissionService.findById(id);
-
         return objectMapperService.map(transmission, TransmissionDTO.class);
     }
 

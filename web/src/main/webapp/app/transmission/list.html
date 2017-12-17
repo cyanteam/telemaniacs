@@ -21,6 +21,7 @@
                     <th>Type</th>
                     <th>Length</th>
                     <th>Language</th>
+                    <th>Occurrences</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
@@ -32,6 +33,11 @@
                 <td>{{transmission.transmissionType}}</td>
                 <td>{{transmission.length}}</td>
                 <td>{{transmission.language}}</td>
+                <td>
+                    <a href="#!/admin/occurrences/{{transmission.id}}" title="Occurrences" style="cursor: pointer; color: greenyellow;">
+                        <span class="fa fa-calendar" aria-hidden="true"></span>
+                    </a>
+                </td>
                 <td>
                     <a href="#!/admin/transmissions/edit/{{transmission.id}}" title="Edit transmission" style="cursor: pointer;">
                         <span class="glyphicon glyphicon-edit"></span>

@@ -11,24 +11,33 @@ import java.util.List;
  * @author Michael Le
  */
 public class ChannelSchedule {
-    private Channel channel;
-
+    private Long channelId;
+    private String channelName;
     private List<TransmissionOccurrence> transmissionOccurrences = new ArrayList<>();
 
     public ChannelSchedule() {
     }
 
     public ChannelSchedule(Channel channel, List<TransmissionOccurrence> transmissionOccurrences) {
-        this.channel = channel;
+        setChannelId(channel.getId());
+        setChannelName(channel.getName());
         this.transmissionOccurrences = transmissionOccurrences;
     }
 
-    public Channel getChannel() {
-        return channel;
+    public Long getChannelId() {
+        return channelId;
     }
 
-    public void setChannel(Channel channel) {
-        this.channel = channel;
+    public void setChannelId(Long channelId) {
+        this.channelId = channelId;
+    }
+
+    public String getChannelName() {
+        return channelName;
+    }
+
+    public void setChannelName(String channelName) {
+        this.channelName = channelName;
     }
 
     public List<TransmissionOccurrence> getTransmissionOccurrences() {

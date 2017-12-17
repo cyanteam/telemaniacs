@@ -7,7 +7,7 @@ telemaniacsApp.controller('MyChannelController', [
 
     function ($scope, $route, $routeParams, $location, pageService) {
         pageService.consumeMessages();
-        pageService.setPageName('My Channel');
+        pageService.setPageName('Followed Channels');
 
         pageService.getDataAsync('/channel/').then(function (response) {
             $scope.channels = response;

@@ -10,7 +10,7 @@ telemaniacsApp.controller('MyTransmissionController', [
 
     function ($scope, $route, $routeParams, $location, pageService) {
         pageService.consumeMessages();
-        pageService.setPageName('My Transmission');
+        pageService.setPageName('Followed Shows');
 
         pageService.getDataAsync('/transmission/').then(function (response) {
             $scope.transmissions = response;

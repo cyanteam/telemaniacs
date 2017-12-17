@@ -102,6 +102,10 @@ public class Transmission {
     }
 
     public List<TransmissionOccurrence> getOccurrences() {
+        if (occurrences == null) {
+            return null;
+        }
+
         return Collections.unmodifiableList(occurrences);
     }
 
@@ -110,6 +114,10 @@ public class Transmission {
     }
 
     public List<Voting> getVoting() {
+        if (voting == null) {
+            return voting;
+        }
+
         return voting;
     }
 

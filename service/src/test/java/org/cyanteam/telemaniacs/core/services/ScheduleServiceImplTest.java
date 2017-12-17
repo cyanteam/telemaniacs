@@ -76,12 +76,12 @@ public class ScheduleServiceImplTest {
         Schedule result = scheduleService.getSchedule(channels, start, end);
         List<ChannelSchedule> actualChannelSchedules = result.getChannelSchedules();
         assertThat(actualChannelSchedules).hasSize(2);
-        assertThat(actualChannelSchedules.get(0).getChannel())
-                .isEqualToComparingFieldByFieldRecursively(hbo);
+        assertThat(actualChannelSchedules.get(0).getChannelId())
+                .isEqualTo(hbo.getId());
         assertThat(actualChannelSchedules.get(0).getTransmissionOccurrences())
                 .containsExactly(occurrence2);
-        assertThat(actualChannelSchedules.get(1).getChannel())
-                .isEqualToComparingFieldByFieldRecursively(nova);
+        assertThat(actualChannelSchedules.get(1).getChannelId())
+                .isEqualTo(nova.getId());
         assertThat(actualChannelSchedules.get(1).getTransmissionOccurrences())
                 .containsExactly(occurrence3);
     }

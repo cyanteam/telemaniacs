@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import org.springframework.web.context.request.WebRequest;
 
-@ControllerAdvice
+//@ControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(value = { Exception.class })
     @ResponseBody

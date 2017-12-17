@@ -2,14 +2,13 @@ package org.cyanteam.telemaniacs.core.dto;
 
 import org.cyanteam.telemaniacs.core.enums.TransmissionType;
 
-import java.util.List;
-
 /**
  * @author Simona Tinkova
+ * @author Michael Le
  */
 
 
-public class TransmissionDTO {
+public class ScheduleTransmissionDTO {
 
 	private Long id;
 	private String name;
@@ -17,8 +16,6 @@ public class TransmissionDTO {
 	private int length;
 	private String language;
 	private TransmissionType transmissionType;
-	private List<TransmissionTransmissionOccurrenceDTO> occurrences;
-	private List<VotingDTO> voting;
 
 	public Long getId() {
 		return id;
@@ -70,28 +67,12 @@ public class TransmissionDTO {
 		this.transmissionType = transmissionType;
 	}
 
-	public List<TransmissionTransmissionOccurrenceDTO> getOccurrences() {
-		return occurrences;
-	}
-
-	public void setOccurrences(List<TransmissionTransmissionOccurrenceDTO> occurrences) {
-		this.occurrences = occurrences;
-	}
-
-	public List<VotingDTO> getVoting() {
-		return voting;
-	}
-
-	public void setVoting(List<VotingDTO> voting) {
-		this.voting = voting;
-	}
-
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
-		if (!(o instanceof TransmissionDTO)) return false;
+		if (!(o instanceof ScheduleTransmissionDTO)) return false;
 
-		TransmissionDTO that = (TransmissionDTO) o;
+		ScheduleTransmissionDTO that = (ScheduleTransmissionDTO) o;
 
 		return getId() != null ? getId().equals(that.getId()) : that.getId() == null;
 	}

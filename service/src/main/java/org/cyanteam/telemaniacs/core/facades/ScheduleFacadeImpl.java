@@ -65,9 +65,9 @@ public class ScheduleFacadeImpl implements ScheduleFacade {
     }
 
     private ScheduleDTO mapStartDate(Schedule schedule, ScheduleDTO scheduleDTO) {
-        List<ChannelScheduleDTO> channelSchedules = scheduleDTO.getChannelSchedules();
+        List<ScheduleChannelDTO> channelSchedules = scheduleDTO.getChannelSchedules();
         for (int i = 0; i < channelSchedules.size(); i++) {
-            List<TransmissionOccurrenceDTO> occurrences = channelSchedules.get(i).getTransmissionOccurrences();
+            List<ScheduleTransmissionOccurrenceDTO> occurrences = channelSchedules.get(i).getTransmissionOccurrences();
             for (int j = 0; j < occurrences.size(); j++) {
                 occurrences.get(j).setStartDate(
                         schedule.getChannelSchedules().get(i)

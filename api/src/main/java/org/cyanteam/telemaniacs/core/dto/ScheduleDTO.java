@@ -7,14 +7,14 @@ import java.util.List;
  * @author Simona Tinkova
  */
 public class ScheduleDTO {
-	private List<ChannelScheduleDTO> channelSchedules = new ArrayList<>();
+	private List<ScheduleChannelDTO> channelSchedules = new ArrayList<>();
 
 
-	public List<ChannelScheduleDTO> getChannelSchedules() {
+	public List<ScheduleChannelDTO> getChannelSchedules() {
 		return channelSchedules;
 	}
 
-	public void setChannelSchedules(List<ChannelScheduleDTO> channelSchedules) {
+	public void setChannelSchedules(List<ScheduleChannelDTO> channelSchedules) {
 		this.channelSchedules = channelSchedules;
 	}
 
