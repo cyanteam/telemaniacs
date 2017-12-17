@@ -113,9 +113,9 @@ public class TransmissionController {
 	}
 
 	@RequestMapping(value = "/type/{type}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public final List<TransmissionDTO> getTransmissionsByType(@PathVariable("type") TransmissionType type) {
+	public final List<TransmissionDTO> getTransmissionsByType(@PathVariable("type") String type) {
 		List<TransmissionDTO> transmissions = transmissionFacade
-				.findByType(type);
+				.findByType(TransmissionType.valueOf(type));
 
 		if (transmissions == null) {
 			throw new IllegalArgumentException("No transmissions with this type");
