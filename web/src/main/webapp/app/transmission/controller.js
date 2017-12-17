@@ -104,6 +104,9 @@ telemaniacsApp.controller('TransmissionsFindController', [
         pageService.consumeMessages();
         pageService.setPageName('Find Show');
         
+        $scope.transmissions = [];
+        $scope.noData = undefined;
+        
         $scope.channelTypes = [
             { id: 'MOVIE', name: 'Movie' },
             { id: 'DOCUMENTARY', name: 'Documentary' },
@@ -113,22 +116,34 @@ telemaniacsApp.controller('TransmissionsFindController', [
             { id: 'CHILDREN', name: 'Children' }
         ];
         
-        $scope.findByName = function (name) {
-            var errorMessages = {
-                'otherwise': 'Transmission cannot be found: {msg}'
-            };
-
-            pageService.sendDataAsync('transmission/name/' + name, 'GET', name, 'Transmissions found.',
-                    'shows/find', errorMessages);
+        $scope.findByName = function (name) {           
+            pageService.getDataAsync('transmission/name/' + name).then(function(transmission) {
+                if(transmission === null) {
+                    console.log('No such transmission');
+                    $scope.transmissions = [];
+                    $scope.noData = true;
+                    return;
+                }
+                
+                $scope.transmissions = [transmission];
+                $scope.noData = false;
+                console.log($scope.transmissions);
+            })
         };
         
         $scope.findByType = function (type) {
-            var errorMessages = {
-                'otherwise': 'Transmission cannot be found: {msg}'
-            };
-
-            pageService.sendDataAsync('transmission/type/' + type, 'GET', type, 'Transmissions found.',
-                    'shows/find', errorMessages);
+            pageService.getDataAsync('transmission/type/' + type).then(function(transmissions) {
+                if(transmissions === null) {
+                    console.log('No transmissions of chosen type');
+                    $scope.transmissions = [];
+                    $scope.noData = true;
+                    return;
+                }
+                
+                $scope.transmissions = transmissions;
+                $scope.noData = false;
+                console.log($scope.transmissions);
+            });
         };
     }
 ]);
