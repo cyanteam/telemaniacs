@@ -55,3 +55,29 @@ telemaniacsApp.controller('TransmissionsCreateController', [
         };
     }
 ]);
+
+telemaniacsApp.controller('TransmissionsListController', [
+    '$scope',
+    'PageService',
+
+    function ($scope, pageService) {
+        pageService.consumeMessages();
+        pageService.setPageName('Administration of transmissions');
+
+        pageService.getDataAsync('transmission').then(function (transmissions) {
+            $scope.transmissions = transmissions;
+        });
+
+        $scope.delete = function (transmission) {
+            var errorMessages = {
+                'otherwise': 'Transmission cannot be deleted: {msg}'
+            };
+
+            pageService.sendDataAsync('transmission/' + transmission.id, 'DELETE', transmission, 'Transmission was deleted.',
+                'admin/transmissions/', errorMessages);
+
+        };
+    }
+
+
+]);

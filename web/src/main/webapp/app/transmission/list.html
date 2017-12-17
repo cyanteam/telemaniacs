@@ -1,0 +1,41 @@
+<a href="#!/admin/transmissions/create" class="btn btn-primary" style="margin: 10px;">
+    <i class="fa fa-plus" />
+    New transmission
+</a>
+
+<main>
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Length</th>
+                    <th>Language</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="transmission in transmissions track by $index">
+                <td>{{transmission.id}}</td>
+                <td>{{transmission.name}}</td>
+                <td>{{transmission.transmissionType}}</td>
+                <td>{{transmission.length}}</td>
+                <td>{{transmission.language}}</td>
+                <td>
+                    <a href="#!/admin/transmissions/edit/{{transmission.id}}" title="Edit transmission" style="cursor: pointer;">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </a>
+                </td>
+                <td>
+                    <span ng-click="delete(transmission)" class="glyphicon glyphicon-trash"
+                            title="Delete transmission" style="cursor: pointer; color: red;" ></span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</main>
