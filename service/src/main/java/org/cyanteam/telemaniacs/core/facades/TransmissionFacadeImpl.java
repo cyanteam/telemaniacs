@@ -165,9 +165,9 @@ public class TransmissionFacadeImpl implements TransmissionFacade {
         }
         Transmission transmission = prepareTransmission(transmissionDTO);
 
-        Double votings = transmissionService.getAverageVoting(transmission);
+        Double rank = transmissionService.getAverageVoting(transmission);
 
-        return votings;
+        return rank != null ? rank : 0;
     }
 
     @Override
