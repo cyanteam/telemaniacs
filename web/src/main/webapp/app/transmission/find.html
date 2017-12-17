@@ -1,0 +1,43 @@
+<main>
+    <div class="container">
+        <h2>
+            <span>Search by name</span>
+        </h2>
+
+        <form name="form" class="form-horizontal" novalidate>
+            <div class="form-group" ng-class="{ 'has-error': !(form.name.$valid) }">
+                <label for="name" class="control-label col-sm-2">Name</label>
+                <div class="col-sm-5">
+                    <input ng-model="searchName" id="name" name="name" type="text" class="form-control" required/>
+                    <p ng-show="form.name.$error.required" class="help-block">Name is required.</p>
+                </div>
+                <div class="col-sm-5">
+                    <button ng-click="findByName(searchName)" ng-disabled="!form.name.$valid" class="btn btn-primary" type="submit">
+                        <i class="fa fa-search"></i> Search by name
+                    </button>
+                </div>
+        </form>
+    </div>
+    <div class="container">
+        <h2>
+            <span>Search by type</span>
+        </h2>
+        <form name="typeForm" class="form-horizontal" novalidate>
+            <div class="form-group" ng-class="{ 'has-error': !(typeForm.channelType.$valid) }">
+                <label for="type" class="control-label col-sm-2">Channel type</label>
+                <div class="col-sm-5">
+                    <select ng-model="chosenChannelType" id="channelType" name="channelType" class="form-control" required>
+                        <option ng-repeat="channelType in channelTypes" value="{{ channelType.id}}">
+                            {{ channelType.name}}
+                        </option>
+                    </select>
+                    <p ng-show="typeForm.channelType.$error.required" class="help-block">Channel type is required.</p>
+                </div>
+                <div class="col-sm-5">
+                    <button ng-click="findByType(chosenChannelType)" ng-disabled="!typeForm.channelType.$valid" class="btn btn-primary" type="submit">
+                        <i class="fa fa-search"></i> Search by type
+                    </button>
+                </div>
+        </form>
+    </div>
+</main>
