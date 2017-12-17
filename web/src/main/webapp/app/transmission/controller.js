@@ -20,18 +20,17 @@ telemaniacsApp.controller('TransmissionsCreateController', [
     '$routeParams',
     '$location',
     'PageService',
-
     function ($scope, $route, $routeParams, $location, pageService) {
         pageService.consumeMessages();
         pageService.setPageName('Transmission Administration');
 
 
         $scope.transmissionTypes = [
-            { id: 'MOVIE', name: 'Movie' },
-            { id: 'TV_SERIES', name: 'TV Series' },
-            { id: 'TV_SHOW', name: 'TV Show' },
-            { id: 'SPORT_EVENT', name: 'Sport' },
-            { id: 'DOCUMENTARY', name: 'Documentary' }
+            {id: 'MOVIE', name: 'Movie'},
+            {id: 'TV_SERIES', name: 'TV Series'},
+            {id: 'TV_SHOW', name: 'TV Show'},
+            {id: 'SPORT_EVENT', name: 'Sport'},
+            {id: 'DOCUMENTARY', name: 'Documentary'}
         ];
 
         $scope.transmission = {
@@ -64,10 +63,10 @@ telemaniacsApp.controller('TransmissionsCreateController', [
 
             if (!pageService.isEditing($route)) {
                 pageService.sendDataAsync('transmission/add/', 'POST', transmission, 'Transmission was added.',
-                    'admin/transmissions/', errorMessages);
+                        'admin/transmissions/', errorMessages);
             } else {
                 pageService.sendDataAsync('transmission/' + transmission.id, 'PUT', transmission, 'Transmission was updated.',
-                    'admin/transmissions/', errorMessages);
+                        'admin/transmissions/', errorMessages);
             }
         };
     }
@@ -76,7 +75,6 @@ telemaniacsApp.controller('TransmissionsCreateController', [
 telemaniacsApp.controller('TransmissionsListController', [
     '$scope',
     'PageService',
-
     function ($scope, pageService) {
         pageService.consumeMessages();
         pageService.setPageName('Transmission Administration');
@@ -91,10 +89,46 @@ telemaniacsApp.controller('TransmissionsListController', [
             };
 
             pageService.sendDataAsync('transmission/' + transmission.id, 'DELETE', transmission, 'Transmission was deleted.',
-                'admin/transmissions/', errorMessages);
+                    'admin/transmissions/', errorMessages);
 
         };
     }
+]);
 
+telemaniacsApp.controller('TransmissionsFindController', [
+    '$scope',
+    'PageService',
+    
+    function ($scope, pageService) {
+        console.log('TransmissionFindController');
+        pageService.consumeMessages();
+        pageService.setPageName('Find Show');
+        
+        $scope.channelTypes = [
+            { id: 'MOVIE', name: 'Movie' },
+            { id: 'DOCUMENTARY', name: 'Documentary' },
+            { id: 'COMMERCE', name: 'Commerce' },
+            { id: 'MUSIC', name: 'Music' },
+            { id: 'SPORT', name: 'Sport' },
+            { id: 'CHILDREN', name: 'Children' }
+        ];
+        
+        $scope.findByName = function (name) {
+            var errorMessages = {
+                'otherwise': 'Transmission cannot be found: {msg}'
+            };
 
+            pageService.sendDataAsync('transmission/name/' + name, 'GET', name, 'Transmissions found.',
+                    'shows/find', errorMessages);
+        };
+        
+        $scope.findByType = function (type) {
+            var errorMessages = {
+                'otherwise': 'Transmission cannot be found: {msg}'
+            };
+
+            pageService.sendDataAsync('transmission/type/' + type, 'GET', type, 'Transmissions found.',
+                    'shows/find', errorMessages);
+        };
+    }
 ]);
