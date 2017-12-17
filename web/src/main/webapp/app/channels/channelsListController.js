@@ -17,8 +17,8 @@ telemaniacsApp.controller('ChannelsListController', [
         $scope.delete = function (channel) {
             console.log('Delete');
             var errorMessages = {
-                'DataAccessException': 'Chanel for deletion does not exist!',
-                'otherwise': 'Channel channot be deleted: {msg}'
+                'DataAccessException': 'Channel for deletion does not exist!',
+                'otherwise': 'Channel cannot be deleted: {msg}'
             };
             
             pageService.sendDataAsync('channel/' + channel.id, 'DELETE', channel, 'Channel was deleted.',

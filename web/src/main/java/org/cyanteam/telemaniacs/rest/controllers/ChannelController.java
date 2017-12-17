@@ -104,8 +104,7 @@ public class ChannelController {
     @RequestMapping(value = "/{userId}/unfollow/{channelId}", method = RequestMethod.POST, 
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ChannelDTO unfollowChannel(@PathVariable("userId") long userId, 
-            @PathVariable("channelId") long channelId ) {        
-        
+            @PathVariable("channelId") long channelId ) {
         userProfileFacade.unfollowChannel(userId, channelId);
         
         return channelFacade.findById(channelId);
