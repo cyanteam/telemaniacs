@@ -68,5 +68,15 @@ telemaniacsApp.config(function($routeProvider) {
             templateUrl: 'app/transmission/myTransmissionList.html'
         })
 
+        .when('/login', {
+            controller: 'LoginController',
+            templateUrl: 'app/login/login.html'
+        })
+
+        .when('/user-profile/logout', {
+            controller: 'LogoutController',
+            templateUrl: 'app/login/logout.html'
+        })
+
         .otherwise({ redirectTo: '/schedule' });
 });

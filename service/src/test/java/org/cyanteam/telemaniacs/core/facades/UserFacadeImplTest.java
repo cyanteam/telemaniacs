@@ -98,7 +98,6 @@ public class UserFacadeImplTest {
     @Test
     public void authenticateUserTest() throws AuthenticationException {
         UserAuthenticationDTO userAuthDTO = new UserAuthenticationDTO();
-        userAuthDTO.setId(1L);
         userAuthDTO.setEmail("adultUser@test.com");
         userAuthDTO.setPassword("testPassword");
 

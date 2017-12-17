@@ -1,0 +1,16 @@
+<form name="loginForm" ng-controller="LoginController"
+      ng-submit="login(userAuthenticate)" novalidate>
+
+    <tm-alerts></tm-alerts>
+
+    <label for="email">Email:</label>
+    <input type="text" id="email"
+           ng-model="userAuthenticate.email">
+
+    <label for="password">Password:</label>
+    <input type="password" id="password"
+           ng-model="userAuthenticate.password">
+
+    <button type="submit">Login</button>
+
+</form>

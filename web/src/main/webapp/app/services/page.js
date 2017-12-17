@@ -1,8 +1,14 @@
-telemaniacsApp.factory('PageService', function($rootScope, $http, $location) {
+telemaniacsApp.factory('PageService', function ($rootScope, $http, $location) {
     var _title = '';
     var _pageName = '';
     var _useSchedulerLayout = false;
     var _restPrefix = 'rest/';
+
+    $rootScope.user = {
+        'id': null,
+        'username': '',
+        'isAdmin': null
+    };
 
     return {
         getTitle: function () {
@@ -86,19 +92,44 @@ telemaniacsApp.factory('PageService', function($rootScope, $http, $location) {
         },
 
         getUser: function () {
-            return {
-                'id': 1,
-                'username': 'admin',
-                'isAdmin': true
-            };
+            return $rootScope.user;
         },
-        
+
+        setUser: function (user) {
+            $rootScope.user = user;
+        },
+
         isLoggedIn: function () {
             return typeof this.getUser() !== typeof undefined && this.getUser() !== null;
         },
 
         isAdministrator: function () {
             return this.isLoggedIn() && this.getUser().isAdmin;
+        },
+
+        login: function (userAuthenticate) {
+            var _this = this;
+            return $http({
+                url: 'rest/user/authenticate',
+                method: 'POST',
+                data: userAuthenticate
+            })
+                .then(function (response) {
+                        _this.getDataAsync('user/email/' + userAuthenticate.email + '/').then(function (user) {
+                            _this.setUser(user);
+                            $location.path('schedule');
+                        });
+                    }, function (reason) {
+                        _this.pushErrorMessage('User authorization failed. Wrong email or password');
+                        _this.consumeMessages();
+                    }
+                )
+        },
+
+        logout: function () {
+            this.setUser(undefined);
+            this.pushSuccessMessage('Successfully logged out.');
+            $location.path('schedule');
         }
     };
 });

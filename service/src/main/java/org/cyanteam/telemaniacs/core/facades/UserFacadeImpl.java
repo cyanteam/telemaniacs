@@ -74,7 +74,10 @@ public class UserFacadeImpl implements UserFacade {
 
         User user = userService.findByEmail(email);
 
-        return objectMapperService.map(user, UserDTO.class);
+        UserDTO userDTO = objectMapperService.map(user, UserDTO.class);
+        userDTO.setIsAdmin(user.isAdmin());
+
+        return userDTO;
     }
 
     @Override
