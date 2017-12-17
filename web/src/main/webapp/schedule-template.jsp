@@ -45,7 +45,7 @@
                         </li>
 
                         <li class="action">
-                            <a href="#">
+                            <a href="#!/shows/find">
                                 <i class="fa fa-search"></i>
                                 Find Show
                             </a>
