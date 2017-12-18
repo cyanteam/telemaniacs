@@ -1,0 +1,55 @@
+<section id="custom-header" data-size="4">
+    <div class="col-md-12 buttons">
+        <div class="pull-right">
+            <a href="#!/admin/transmissions/create" class="btn btn-primary">
+                <i class="fa fa-plus"></i>
+                Create transmission
+            </a>
+        </div>
+    </div>
+</section>
+
+<main>
+    <div class="container">
+        <tm-alerts></tm-alerts>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Length</th>
+                    <th>Language</th>
+                    <th>Occurrences</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="transmission in transmissions track by $index">
+                <td>{{transmission.id}}</td>
+                <td>{{transmission.name}}</td>
+                <td>{{transmission.transmissionType}}</td>
+                <td>{{transmission.length}}</td>
+                <td>{{transmission.language}}</td>
+                <td>
+                    <a href="#!/admin/occurrences/{{transmission.id}}" title="Occurrences" style="cursor: pointer; color: greenyellow;">
+                        <span class="fa fa-calendar" aria-hidden="true"></span>
+                    </a>
+                </td>
+                <td>
+                    <a href="#!/admin/transmissions/edit/{{transmission.id}}" title="Edit transmission" style="cursor: pointer;">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </a>
+                </td>
+                <td>
+                    <span ng-click="delete(transmission)" class="glyphicon glyphicon-trash"
+                            title="Delete transmission" style="cursor: pointer; color: red;" ></span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</main>

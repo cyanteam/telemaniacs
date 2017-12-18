@@ -4,11 +4,13 @@ import java.util.Collection;
 
 /**
  * Simple statistics calculation
+ *
  * @author Michael Le
  */
 public interface StatisticsService {
     /**
      * Sums all items in collection
+     *
      * @param items Collection of items
      * @return sum of items
      */
@@ -16,6 +18,7 @@ public interface StatisticsService {
 
     /**
      * Calculates average of items in collection
+     *
      * @param items Collection of items
      * @return average of items
      */

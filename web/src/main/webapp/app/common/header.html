@@ -1,0 +1,117 @@
+<header>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <a class="navbar-brand" href="#!">
+                    <img src="media/logo.png" alt="Telemaniacs" class="img-responsive" />
+                </a>
+            </div>
+
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="action">
+                        <a href="#!/schedule">
+                            <i class="fa fa-calendar"></i>
+                            TV Schedule
+                        </a>
+                    </li>
+
+                    <li class="action">
+                        <a href="#!/shows/find">
+                            <i class="fa fa-search"></i>
+                            Find Show
+                        </a>
+                    </li>
+
+                    <li class="action dropdown" ng-if="$ctrl.pageService.isAdministrator()">
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-unlock-alt"></i> Manage <span class="caret"></span>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#!/admin/channels">
+                                    <i class="fa fa-television"></i> Channels
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#!/admin/transmissions">
+                                    <i class="fa fa-eye"></i> Shows
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="action notification" ng-if="$ctrl.pageService.isLoggedIn()">
+                        <a href="#!/user-profile/upcomingTransmissions" title="Notifications">
+                            <i class="fa fa-bell"></i> <span class="hidden">Notifications</span>
+                        </a>
+                    </li>
+
+                    <li class="action" ng-if="!$ctrl.pageService.isLoggedIn()">
+                        <a href="#!/user-profile/registration">
+                            <i class="fa fa-key"></i>
+                            Registration
+                        </a>
+                    </li>
+
+                    <li class="action" ng-if="!$ctrl.pageService.isLoggedIn()">
+                        <a class="user" href="#!/login">
+                            Log In
+                        </a>
+                    </li>
+
+                    <li class="dropdown" ng-if="$ctrl.pageService.isLoggedIn()">
+                        <a class="user dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            {{ $ctrl.pageService.getUser().username }} <span class="caret"></span>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#!/user-profile/channels">
+                                    <i class="fa fa-heart"></i> Followed Channels
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#!/user-profile/shows">
+                                    <i class="fa fa-star"></i> Followed Shows
+                                </a>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a href="#!/user-profile/logout" class="logout">
+                                    <i class="fa fa-power-off"></i> Log Out
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="page-header">
+        <div class="container">
+            <div class="row">
+                <div id="page-header-name">
+                    <h2>{{ $ctrl.pageService.getPageName() }}</h2>
+                </div>
+
+                <div id="page-header-custom">
+                    <div id="custom-header-placeholder"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="custom-panel-placeholder"></div>
+</header>

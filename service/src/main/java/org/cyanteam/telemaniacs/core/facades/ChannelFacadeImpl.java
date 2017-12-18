@@ -1,5 +1,6 @@
 package org.cyanteam.telemaniacs.core.facades;
 
+import org.cyanteam.telemaniacs.core.dto.ChannelCreateDTO;
 import org.cyanteam.telemaniacs.core.dto.ChannelDTO;
 import org.cyanteam.telemaniacs.core.entities.Channel;
 import org.cyanteam.telemaniacs.core.enums.ChannelType;
@@ -11,8 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.List;
+import java.util.Objects;
 
 /**
+ * Class implements facade of channels.
  *
  * @author Tomas Milota
  */
@@ -26,40 +29,40 @@ public class ChannelFacadeImpl implements ChannelFacade {
     private ObjectMapperService objectMapperService;
 
     @Override
-    public void createChannel(ChannelDTO channelDTO) {
-        Channel channel = prepareChannel(channelDTO);
+    public Long create(ChannelCreateDTO channelCreateDTO) {
+        Objects.requireNonNull(channelCreateDTO, "ChannelCreateDTO cannot be null.");
+        Channel channel = objectMapperService.map(channelCreateDTO, Channel.class);
 
         channelService.create(channel);
-        channelDTO.setId(channel.getId());
+        return channel.getId();
     }
 
     @Override
-    public void updateChannel(ChannelDTO channelDTO) {
+    public void update(ChannelDTO channelDTO) {
         Channel channel = prepareChannel(channelDTO);
 
         channelService.update(channel);
     }
 
     @Override
-    public void removeChannel(ChannelDTO channelDTO) {
+    public void remove(ChannelDTO channelDTO) {
         Channel channel = prepareChannel(channelDTO);
 
         channelService.remove(channel);
     }
 
     @Override
-    public ChannelDTO findChannelById(Long id) {
+    public ChannelDTO findById(Long id) {
         if (id == null) {
             throw new IllegalArgumentException("Id of channel cannot be null!");
         }
 
         Channel channel = channelService.findById(id);
-
         return objectMapperService.map(channel, ChannelDTO.class);
     }
 
     @Override
-    public ChannelDTO findChannelByName(String name) {
+    public ChannelDTO findByName(String name) {
         if (name == null || name.isEmpty()) {
             throw new IllegalArgumentException("Name of channel is null or empty!");
         }
@@ -70,7 +73,7 @@ public class ChannelFacadeImpl implements ChannelFacade {
     }
 
     @Override
-    public List<ChannelDTO> findChannelsByType(ChannelType type) {
+    public List<ChannelDTO> findAllOfType(ChannelType type) {
         if (type == null) {
             throw new IllegalArgumentException("Type of channel cannot be null!");
         }
@@ -81,7 +84,7 @@ public class ChannelFacadeImpl implements ChannelFacade {
     }
 
     @Override
-    public List<ChannelDTO> findAllChannels() {
+    public List<ChannelDTO> findAll() {
         List<Channel> channels = channelService.findAll();
 
         return objectMapperService.map(channels, ChannelDTO.class);

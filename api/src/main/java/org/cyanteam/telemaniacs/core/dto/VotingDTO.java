@@ -12,9 +12,9 @@ public class VotingDTO {
 
 	private String comment;
 
-	private UserDTO user;
+	private VotingUserDTO user;
 
-	private TransmissionDTO transmission;
+	private VotingTransmissionDTO transmission;
 
 
 	public Long getId() {
@@ -50,19 +50,19 @@ public class VotingDTO {
 		this.comment = comment;
 	}
 
-	public UserDTO getUser() {
+	public VotingUserDTO getUser() {
 		return user;
 	}
 
-	public void setUser(UserDTO user) {
+	public void setUser(VotingUserDTO user) {
 		this.user = user;
 	}
 
-	public TransmissionDTO getTransmission() {
+	public VotingTransmissionDTO getTransmission() {
 		return transmission;
 	}
 
-	public void setTransmission(TransmissionDTO transmission) {
+	public void setTransmission(VotingTransmissionDTO transmission) {
 		this.transmission = transmission;
 	}
 

@@ -1,0 +1,41 @@
+<main>
+    <div class="container">
+        <tm-alerts></tm-alerts>
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Transmission name</th>
+                    <th>Description</th>
+                    <th>Length</th>
+                    <th>Language</th>
+                    <th>Transmission type</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="transmission in transmissions">
+                    <td>{{ $index + 1}}</td>
+                    <td>{{ transmission.name}}</td>
+                    <td>{{ transmission.description}}</td>
+                    <td>{{ transmission.length}}</td>
+                    <td>{{ transmission.language}}</td>
+                    <td>{{ transmission.transmissionType}}</td>
+                    <td>
+                        <span class="fa fa-star-o" aria-hidden="true"
+                              style="color:gray;"
+                              title="Remove from favourite"
+                              ng-click="unfollow(transmission)"
+                        />
+
+                        <a href="#" ng-click="unfollow(transmission)">Unfollow</a>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>

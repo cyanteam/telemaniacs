@@ -1,0 +1,60 @@
+<section id="custom-header" data-size="7">
+    <div class="col-md-12 buttons">
+        <div class="pull-right">
+            <a href="#!/admin/transmissions" class="btn btn-primary">
+                <i class="fa fa-eye"></i>
+                Shows
+            </a>
+
+            <a href="#!/admin/occurrences/create/{{ transmission.id }}" class="btn btn-primary">
+                <i class="fa fa-plus"></i>
+                Create occurrence
+            </a>
+        </div>
+    </div>
+</section>
+
+<main>
+    <div class="container">
+        <tm-alerts></tm-alerts>
+
+        <h2><span>Occurrences of show {{transmission.name}}</span></h2>
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Part name</th>
+                    <th>Channel</th>
+                    <th>Start time</th>
+                    <th>Rerun?</th>
+                    <th>Edit occurrence</th>
+                    <th>Delete occurrence</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="occurrence in occurrences">
+                    <td>{{ $index + 1}}</td>
+                    <td>{{ occurrence.partName }}</td>
+                    <td>{{ occurrence.channel.name }}</td>
+                    <td>{{ occurrence.startDate | date: 'MM/dd/yyyy HH:mm' }}</td>
+                    <td>{{ occurrence.rerun }}</td>
+                    <td>
+                        <a href="#!/admin/occurrences/edit/{{occurrence.id}}" title="Edit occurrence" style="cursor: pointer;">
+                            <span class="glyphicon glyphicon-edit"></span>
+                        </a>
+                    </td>
+                    <td>
+                        <span class="glyphicon glyphicon-trash"
+                              style="cursor:pointer; color:red;"
+                              title="Delete occurrence"
+                              ng-click="delete(occurrence, transmission.id)"
+                        />
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>

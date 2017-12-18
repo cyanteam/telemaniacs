@@ -8,7 +8,7 @@ import org.cyanteam.telemaniacs.core.entities.TransmissionOccurrence;
 import org.cyanteam.telemaniacs.core.entities.User;
 import org.cyanteam.telemaniacs.core.enums.AgeAvailability;
 import org.cyanteam.telemaniacs.core.enums.ChannelType;
-import org.cyanteam.telemaniacs.core.enums.Sex;
+import org.cyanteam.telemaniacs.core.enums.Gender;
 import org.cyanteam.telemaniacs.core.enums.TransmissionType;
 import org.cyanteam.telemaniacs.core.helpers.TransmissionBuilder;
 import org.cyanteam.telemaniacs.core.helpers.TransmissionOccurrenceBuilder;
@@ -358,7 +358,7 @@ public class TransmissionOccurrenceDaoTest {
 		user.setUsername("user");
 		user.setEmail("user@mail.com");
 		user.setAge(20);
-		user.setSex(Sex.MALE);
+		user.setGender(Gender.MALE);
 		user.setPasswordHash("passwordHash");
 		return user;
 	}

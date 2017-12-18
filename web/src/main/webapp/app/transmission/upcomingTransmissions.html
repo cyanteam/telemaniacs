@@ -1,0 +1,39 @@
+<main>
+    <div class="container">
+        <tm-alerts></tm-alerts>
+
+        <div ng-repeat="transmission in upcomingTransmissions" class="row">
+            <div class="col-md-4">
+                <h2><span>{{ transmission.name }}</span></h2>
+                <div>
+                    <b><i>Length:</i></b>&nbsp<span>{{ transmission.length }}&nbspmin</span>
+                </div>
+                <div>
+                    <b><i>Description:</i></b>&nbsp<span>{{ transmission.description | limitTo: 250 }}...</span>
+                    <a href="#!/details/{{transmission.id}}" style="cursor: pointer;">
+                        more
+                    </a>
+                </div>
+            </div>
+
+            <div class="table-responsive col-md-6" style="margin-top: 15px;">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Start time</th>
+                        <th>Channel</th>
+                        <th>Part name</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="occurrence in transmission.occurrences | limitTo:5">
+                        <td>{{ occurrence.startDate | date: 'MM/dd/yyyy HH:mm'}}</td>
+                        <td>{{ occurrence.channel.name}}</td>
+                        <td>{{ occurrence.partName}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+</main>

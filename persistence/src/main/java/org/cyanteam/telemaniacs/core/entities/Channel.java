@@ -4,6 +4,7 @@ import org.cyanteam.telemaniacs.core.enums.ChannelType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -26,7 +27,7 @@ public class Channel {
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "channel")
-    private List<TransmissionOccurrence> transmissionOccurrences;
+    private List<TransmissionOccurrence> transmissionOccurrences = new ArrayList<>();
 
     @Enumerated
     private ChannelType channelType;

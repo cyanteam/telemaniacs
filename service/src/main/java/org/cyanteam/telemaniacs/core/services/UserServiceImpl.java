@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
+
 import org.cyanteam.telemaniacs.core.dao.UserDao;
 import org.cyanteam.telemaniacs.core.entities.User;
 import org.springframework.stereotype.Service;
@@ -23,62 +24,62 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
-    public void createUser(User user, String encryptedPassword) {
+    public void create(User user, String encryptedPassword) {
         user.setPasswordHash(createHash(encryptedPassword));
         userDao.create(user);
     }
 
     @Override
-    public void removeUser(User user) {
+    public void remove(User user) {
         userDao.remove(user);
     }
 
     @Override
-    public void updateUser(User user) {
+    public void update(User user) {
         userDao.update(user);
     }
 
     @Override
-    public User findUserById(Long id) {
+    public User findById(Long id) {
         return userDao.findById(id);
     }
 
     @Override
-    public User findUserByEmail(String email) {
+    public User findByEmail(String email) {
         return userDao.findByEmail(email);
     }
 
     @Override
-    public User findUserByUserName(String name) {
+    public User findByUserName(String name) {
         return userDao.findByUsername(name);
     }
 
     @Override
-    public List<User> findAllUsers() {
+    public List<User> findAll() {
         return userDao.findAll();
     }
-    
+
     @Override
-    public boolean authenticate(User user, String password) {        
+    public boolean authenticate(User user, String password) {
         return validatePassword(password, user.getPasswordHash());
     }
 
     @Override
     public boolean isAdmin(User user) {
-        return findUserById(user.getId()).isAdmin();
+        return findById(user.getId()).isAdmin();
     }
-    
-    public static boolean validatePassword(String password, String correctHash) {
-        if(password==null) return false;
-        if(correctHash==null) throw new IllegalArgumentException("Password hash is null!");
+
+    private static boolean validatePassword(String password, String correctHash) {
+        if (password == null) return false;
+        if (correctHash == null) throw new IllegalArgumentException("Password hash is null!");
         String[] params = correctHash.split(":");
         int iterations = Integer.parseInt(params[0]);
         byte[] salt = fromHex(params[1]);
         byte[] hash = fromHex(params[2]);
         byte[] testHash = pbkdf2(password.toCharArray(), salt, iterations, hash.length);
         return slowEquals(hash, testHash);
-    }  
-        
+    }
+
     private static String createHash(String password) {
         final int SALT_BYTE_SIZE = 24;
         final int HASH_BYTE_SIZE = 24;
@@ -131,5 +132,5 @@ public class UserServiceImpl implements UserService {
         for (int i = 0; i < a.length && i < b.length; i++)
             diff |= a[i] ^ b[i];
         return diff == 0;
-    }  
+    }
 }

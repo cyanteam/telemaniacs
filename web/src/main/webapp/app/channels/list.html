@@ -1,0 +1,51 @@
+<section id="custom-header" data-size="4">
+    <div class="col-md-12 buttons">
+        <div class="pull-right">
+            <a href="#!/admin/channels/create" class="btn btn-primary">
+                <i class="fa fa-plus"></i>
+                Create channel
+            </a>
+        </div>
+    </div>
+</section>
+
+<main>
+    <div class="container">
+        <tm-alerts></tm-alerts>
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Channel name</th>
+                        <th>Channel type</th>
+                        <th>Language</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="channel in channels">
+                        <td>{{ $index + 1}}</td>
+                        <td>{{ channel.name}}</td>
+                        <td>{{ channel.channelType}}</td>
+                        <td>{{ channel.language}}</td>
+                        <td>
+                            <a href="#!/admin/channels/edit/{{channel.id}}" title="Edit channel" style="cursor: pointer;">
+                                <span class="glyphicon glyphicon-edit"></span>
+                            </a>
+                        </td>
+                        <td>
+                            <span class="glyphicon glyphicon-trash"
+                                  style="cursor:pointer; color:red;"
+                                  title="Delete channel"
+                                  ng-click="delete(channel)"
+                            />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>

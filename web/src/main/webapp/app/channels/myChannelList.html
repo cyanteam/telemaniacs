@@ -1,0 +1,60 @@
+<section id="custom-header" data-size="4">
+    <div class="col-md-12 buttons">
+        <div class="pull-right">
+            <a href="#!/schedule" class="btn btn-primary">
+                <i class="fa fa-chevron-left"></i>
+                Back to schedule
+            </a>
+        </div>
+    </div>
+</section>
+
+<main>
+    <div class="container">
+        <tm-alerts></tm-alerts>
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Channel name</th>
+                    <th>Channel type</th>
+                    <th>Language</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="channel in channels">
+                    <td>{{ $index + 1}}</td>
+                    <td>{{ channel.name}}</td>
+                    <td>{{ channel.channelType}}</td>
+                    <td>{{ channel.language}}</td>
+
+                    <td>
+                        <div ng-if="followed.indexOf(channel.id) < 0">
+                            <span class="fa fa-heart"
+                                  style="color:red;"
+                                  title="Add to favourite"
+                                  ng-click="follow(channel)"
+                            />
+
+                            <a href="#" ng-click="follow(channel)">Follow</a>
+                        </div>
+
+                        <div ng-if="followed.indexOf(channel.id) > -1">
+                            <span class="fa fa-heart-o"
+                                  style="color:gray;"
+                                  title="Remove from favourite"
+                                  ng-click="unfollow(channel)"
+                            />
+
+                            <a href="#" ng-click="unfollow(channel)">Unfollow</a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>

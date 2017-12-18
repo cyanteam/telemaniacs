@@ -6,7 +6,7 @@ import org.cyanteam.telemaniacs.core.entities.Channel;
 import org.cyanteam.telemaniacs.core.entities.Transmission;
 import org.cyanteam.telemaniacs.core.entities.User;
 import org.cyanteam.telemaniacs.core.entities.Voting;
-import org.cyanteam.telemaniacs.core.enums.Sex;
+import org.cyanteam.telemaniacs.core.enums.Gender;
 
 /**
  * Helper class for building User (for test purposes)
@@ -17,7 +17,7 @@ public class UserBuilder {
     private Long id;
     private String username;
     private String passwordHash;
-    private Sex sex;
+    private Gender gender;
     private int age;
     private String email;
     private boolean isAdmin;
@@ -40,8 +40,8 @@ public class UserBuilder {
         return this;
     }
 
-    public UserBuilder sex(Sex sex) {
-        this.sex = sex;
+    public UserBuilder gender(Gender gender) {
+        this.gender = gender;
         return this;
     }
 
@@ -78,7 +78,7 @@ public class UserBuilder {
     public User build() {
         User user = new User();
         user.setId(id);
-        user.setSex(sex);
+        user.setGender(gender);
         user.setAge(age);
         user.setEmail(email);
         user.setFavoriteChannels(favouriteChannels);
@@ -96,7 +96,7 @@ public class UserBuilder {
 
     public static UserBuilder sampleYoungUserBuilder() {
         return new UserBuilder()
-                .sex(Sex.MALE)
+                .gender(Gender.MALE)
                 .age(5)
                 .email("youngUser@test.com")
                 .passwordHash("youngUserPasswordHash")
@@ -108,7 +108,7 @@ public class UserBuilder {
 
     public static UserBuilder sampleAdultUserBuilder() {
         return new UserBuilder()
-                .sex(Sex.MALE)
+                .gender(Gender.MALE)
                 .age(30)
                 .email("adultUser@test.com")
                 .passwordHash("adultUserPasswordHash")
@@ -120,7 +120,7 @@ public class UserBuilder {
 
     public static UserBuilder sampleAdminBuilder() {
         return new UserBuilder()
-                .sex(Sex.MALE)
+                .gender(Gender.MALE)
                 .age(5)
                 .email("admin@test.com")
                 .passwordHash("adminPasswordHash")

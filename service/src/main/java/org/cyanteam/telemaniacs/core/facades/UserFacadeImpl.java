@@ -2,7 +2,9 @@ package org.cyanteam.telemaniacs.core.facades;
 
 import java.util.List;
 import javax.inject.Inject;
+
 import org.cyanteam.telemaniacs.core.dto.UserAuthenticationDTO;
+import org.cyanteam.telemaniacs.core.dto.UserCreateDTO;
 import org.cyanteam.telemaniacs.core.dto.UserDTO;
 import org.cyanteam.telemaniacs.core.entities.User;
 import org.cyanteam.telemaniacs.core.facade.UserFacade;
@@ -14,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.naming.AuthenticationException;
 
 /**
+ * Implementation of facade service for User.
  *
  * @author Miroslav Kubus
  */
@@ -25,65 +28,68 @@ public class UserFacadeImpl implements UserFacade {
 
     @Inject
     private ObjectMapperService objectMapperService;
-    
+
     @Override
-    public void createUser(UserDTO userDTO, String password) {
+    public void create(UserCreateDTO userCreateDTO) {
+        User user = prepareUser(userCreateDTO);
+
+        userService.create(user, userCreateDTO.getEncryptedPassword());
+    }
+
+    @Override
+    public void update(UserDTO userDTO) {
         User user = prepareUser(userDTO);
 
-        userService.createUser(user, password);
-        userDTO.setId(user.getId());    
+        userService.update(user);
     }
 
     @Override
-    public void updateUser(UserDTO userDTO) {
+    public void remove(UserDTO userDTO) {
         User user = prepareUser(userDTO);
 
-        userService.updateUser(user);
+        userService.remove(user);
     }
 
     @Override
-    public void removeUser(UserDTO userDTO) {
-        User user = prepareUser(userDTO);
-
-        userService.removeUser(user);
+    public List<UserDTO> findAll() {
+        return objectMapperService.map(userService.findAll(), UserDTO.class);
     }
 
     @Override
-    public List<UserDTO> getAllUsers() {
-        return objectMapperService.map(userService.findAllUsers(), UserDTO.class);
-    }
-
-    @Override
-    public UserDTO getUserById(Long userId) {
-        if(userId == null) {
+    public UserDTO findById(Long userId) {
+        if (userId == null) {
             throw new IllegalArgumentException("Id of user cannot be null!");
         }
-        
-        User user = userService.findUserById(userId);
+
+        User user = userService.findById(userId);
 
         return objectMapperService.map(user, UserDTO.class);
     }
 
     @Override
-    public UserDTO getUserByEmail(String email) {
-        if(email == null) {
+    public UserDTO findByEmail(String email) {
+        if (email == null) {
             throw new IllegalArgumentException("Id of user cannot be null!");
         }
-        
-        User user = userService.findUserByEmail(email);
 
-        return objectMapperService.map(user, UserDTO.class);
+        User user = userService.findByEmail(email);
+
+        UserDTO userDTO = objectMapperService.map(user, UserDTO.class);
+        userDTO.setIsAdmin(user.isAdmin());
+
+        return userDTO;
     }
 
     @Override
-    public UserDTO getUserByUsername(String username) {
-        if(username == null) {
+    public UserDTO findByUsername(String username) {
+        if (username == null) {
             throw new IllegalArgumentException("Username of user cannot be null!");
         }
-        
-        User user = userService.findUserByUserName(username);
 
-        return objectMapperService.map(user, UserDTO.class);    }
+        User user = userService.findByUserName(username);
+
+        return objectMapperService.map(user, UserDTO.class);
+    }
 
     @Override
     public boolean authenticate(UserAuthenticationDTO userAuthDTO) throws AuthenticationException {
@@ -91,7 +97,7 @@ public class UserFacadeImpl implements UserFacade {
             throw new IllegalArgumentException("userAuthenticateDTO cannot be null");
         }
 
-        User user = userService.findUserByEmail(userAuthDTO.getEmail());
+        User user = userService.findByEmail(userAuthDTO.getEmail());
         if (user == null) {
             throw new AuthenticationException("User with this email does not exist!");
         }
@@ -104,15 +110,23 @@ public class UserFacadeImpl implements UserFacade {
         if (userDTO == null) {
             throw new IllegalArgumentException("userDTO cannot be null");
         }
-        
+
         return userService.isAdmin(objectMapperService.map(userDTO, User.class));
     }
-    
+
     private User prepareUser(UserDTO userDTO) {
         if (userDTO == null) {
             throw new IllegalArgumentException("UserDTO cannot be null!");
         }
 
         return objectMapperService.map(userDTO, User.class);
-    }    
+    }
+
+    private User prepareUser(UserCreateDTO userCreateDTO) {
+        if (userCreateDTO == null) {
+            throw new IllegalArgumentException("UserCreateDTO cannot be null!");
+        }
+
+        return objectMapperService.map(userCreateDTO, User.class);
+    }
 }

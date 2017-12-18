@@ -33,6 +33,7 @@ import static org.mockito.Mockito.when;
 
 /**
  * Tests for transmission service
+ *
  * @author Michael Le
  */
 @ContextConfiguration(classes = ServiceContextConfiguration.class)
@@ -94,19 +95,19 @@ public class TransmissionServiceImplTest {
 
     @Test
     public void createTransmissionTest() {
-        transmissionService.createTransmission(transmission1);
+        transmissionService.create(transmission1);
         verify(transmissionDao).create(transmission1);
     }
 
     @Test
     public void updateTransmissionTest() {
-        transmissionService.updateTransmission(transmission2);
+        transmissionService.update(transmission2);
         verify(transmissionDao).update(transmission2);
     }
 
     @Test
     public void removeTransmissionTest() {
-        transmissionService.removeTransmission(transmission2);
+        transmissionService.remove(transmission2);
         verify(transmissionDao).delete(transmission2);
     }
 
@@ -115,7 +116,7 @@ public class TransmissionServiceImplTest {
         String transmissionName = transmission2.getName();
         when(transmissionDao.findByName(transmissionName)).thenReturn(transmission2);
 
-        Transmission result = transmissionService.getTransmissionByName(transmissionName);
+        Transmission result = transmissionService.findByName(transmissionName);
         verify(transmissionDao).findByName(transmissionName);
         assertThat(result).isEqualToComparingFieldByField(transmission2);
     }
@@ -125,7 +126,7 @@ public class TransmissionServiceImplTest {
         TransmissionType transmissionType = TransmissionType.MOVIE;
         when(transmissionDao.findByType(transmissionType)).thenReturn(createList(transmission2, transmission3));
 
-        List<Transmission> result = transmissionService.getTransmissionsByType(transmissionType);
+        List<Transmission> result = transmissionService.findAllByType(transmissionType);
         verify(transmissionDao).findByType(transmissionType);
         assertThat(result).containsExactlyInAnyOrder(transmission2, transmission3);
     }

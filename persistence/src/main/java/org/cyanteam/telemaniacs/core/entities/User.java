@@ -7,7 +7,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Email;
 
-import org.cyanteam.telemaniacs.core.enums.Sex;
+import org.cyanteam.telemaniacs.core.enums.Gender;
 
 /**
  * Class represents one user in system.
@@ -30,7 +30,7 @@ public class User implements Serializable {
     
     @NotNull
     @Enumerated
-    private Sex sex;
+    private Gender gender;
     
     @NotNull
     @Min(value = 0)
@@ -83,12 +83,12 @@ public class User implements Serializable {
         this.passwordHash = passwordHash;
     }
 
-    public Sex getSex() {
-        return sex;
+    public Gender getGender() {
+        return gender;
     }
 
-    public void setSex(Sex sex) {
-        this.sex = sex;
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 
     public int getAge() {

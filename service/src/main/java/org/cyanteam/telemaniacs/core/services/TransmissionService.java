@@ -10,75 +10,87 @@ import java.util.List;
 
 /**
  * Transmission service interface
+ *
  * @author Michael Le
  */
 @Service
 public interface TransmissionService {
     /**
      * Creates a new transmission
+     *
      * @param transmission Transmission
      */
-    void createTransmission(Transmission transmission);
+    void create(Transmission transmission);
 
     /**
      * Updates a new transmission
+     *
      * @param transmission Transmission
      */
-    void updateTransmission(Transmission transmission);
+    void update(Transmission transmission);
 
     /**
      * Removes a new transmission
+     *
      * @param transmission Transmission
      */
-    void removeTransmission(Transmission transmission);
+    void remove(Transmission transmission);
 
     /**
      * Gets a transmission by ID
+     *
      * @param id Transmission ID
      * @return Transmission with given ID
      */
-    Transmission getTransmissionById(Long id);
+    Transmission findById(Long id);
 
     /**
      * Gets a transmission by ID
+     *
      * @param name Transmission name
      * @return Transmission with given name
      */
-    Transmission getTransmissionByName(String name);
+    Transmission findByName(String name);
 
     /**
      * Gets transmissions by type
+     *
      * @param type Transmission type
      * @return Transmissions with given type
      */
-    List<Transmission> getTransmissionsByType(TransmissionType type);
+    List<Transmission> findAllByType(TransmissionType type);
 
     /**
      * Gets all transmissions
+     *
      * @return all transmissions
      */
-    List<Transmission> findAllTransmissions();
+    List<Transmission> findAll();
 
     /**
      * Adds transmission occurrence
+     *
      * @param occurrence Transmission occurrence
      */
     void addOccurrence(TransmissionOccurrence occurrence);
 
     /**
      * Updates transmission occurrence
+     *
      * @param occurrence Transmission occurrence
      */
     void updateOccurrence(TransmissionOccurrence occurrence);
 
     /**
      * Removes transmission occurrence
+     *
      * @param occurrence Transmission occurrence
      */
     void removeOccurrence(TransmissionOccurrence occurrence);
 
     /**
      * Get all occurrences of a transmission
+     *
      * @param transmission Transmission
      * @return List of all occurrences of given transmission
      */
@@ -86,6 +98,7 @@ public interface TransmissionService {
 
     /**
      * Get all upcoming occurrences of a transmission
+     *
      * @param transmission Transmission
      * @return List of all upcoming occurrences of given transmission
      */
@@ -93,6 +106,7 @@ public interface TransmissionService {
 
     /**
      * Get all votings of a transmission
+     *
      * @param transmission Transmission
      * @return List of all votings of given transmission
      */
@@ -100,8 +114,11 @@ public interface TransmissionService {
 
     /**
      * Get average voting of a transmission
+     *
      * @param transmission Transmission
      * @return Average voting of given transmission, or null if no voting available
      */
     Double getAverageVoting(Transmission transmission);
+
+    TransmissionOccurrence getOccurranceById(Long id)throws IllegalArgumentException;
 }

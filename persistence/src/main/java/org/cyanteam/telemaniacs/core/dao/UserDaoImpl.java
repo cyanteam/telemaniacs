@@ -8,12 +8,14 @@ import javax.persistence.TypedQuery;
 
 import org.cyanteam.telemaniacs.core.entities.User;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Class accessing persistence context for CRUD operations for user class.
  * It implements UserDao interaface.
  * @author Miroslav Kubus
  */
+@Transactional
 @Repository
 public class UserDaoImpl implements UserDao {
     

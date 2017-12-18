@@ -1,0 +1,73 @@
+<section id="custom-header" data-size="5">
+    <div class="buttons">
+        <div class="pull-right">
+            <a href="#!/admin/occurrences/" class="btn btn-primary">
+                <i class="fa fa-list"></i>
+                List
+            </a>
+        </div>
+    </div>
+</section>
+
+
+<main>
+    <div class="container">
+        <h2>
+            <span ng-if="transmissionOccurrence.id == null">Create Occurrence</span>
+            <span ng-if="transmissionOccurrence.id != null">Edit Occurrence</span>
+        </h2>
+
+        <tm-alerts></tm-alerts>
+
+        <form name="form" class="form-horizontal" novalidate>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Transmission</label>
+                <label class="control-label col-sm-5" style="text-align: left;">{{ transmission.name }}</label>
+            </div>
+
+            <div class="form-group">
+                <label for="channelId" class="control-label col-sm-2">Channel</label>
+                <div class="col-sm-5">
+                    <select ng-model="transmissionOccurrence.channelId" id="channelId" name="channelId" class="form-control" required>
+                        <option ng-repeat="channel in channels" value="{{ channel.id }}" ng-selected="channel.id == transmissionOccurrence.channelId">
+                            {{ channel.name }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-error': !(form.partName.$valid) }">
+                <label for="partName" class="control-label col-sm-2">Part Name</label>
+                <div class="col-sm-5">
+                    <input ng-model="transmissionOccurrence.partName" id="partName" name="partName" type="text" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="startDate" class="control-label col-sm-2">Start Date</label>
+                <div class="col-sm-5">
+                    <input ng-model="transmissionOccurrence.startDate" id="startDate" name="startDate" type="text"
+                           class="form-control" required placeholder="yyyy-mm-dd HH:mm" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-5 col-sm-offset-2">
+                    <label>
+                        <input type="checkbox" ng-model="transmissionOccurrence.isRerun" ng-checked="transmissionOccurrence.rerun"> Is rerun?
+                    </label>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-sm-10 col-sm-offset-2">
+                    <input type="hidden" name="id" ng-model="transmissionOccurrence.id" />
+                    <button ng-click="save(transmissionOccurrence)" ng-disabled="!form.$valid" class="btn btn-primary" type="submit">
+                        <i class="fa fa-save"></i> Save
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>

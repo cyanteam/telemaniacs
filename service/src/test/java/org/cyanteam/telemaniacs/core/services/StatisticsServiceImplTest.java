@@ -17,6 +17,7 @@ import static org.assertj.core.api.Assertions.within;
 
 /**
  * Tests for statistics service
+ *
  * @author Michael Le
  */
 @ContextConfiguration(classes = ServiceContextConfiguration.class)

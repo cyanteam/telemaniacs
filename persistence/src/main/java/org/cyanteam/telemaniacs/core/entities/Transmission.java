@@ -25,6 +25,7 @@ public class Transmission {
     @Column(nullable = false, unique = true)
     private String name;
 
+    @Column(length = 1000)
     private String description;
 
     private int length;
@@ -101,6 +102,10 @@ public class Transmission {
     }
 
     public List<TransmissionOccurrence> getOccurrences() {
+        if (occurrences == null) {
+            return null;
+        }
+
         return Collections.unmodifiableList(occurrences);
     }
 
@@ -109,6 +114,10 @@ public class Transmission {
     }
 
     public List<Voting> getVoting() {
+        if (voting == null) {
+            return voting;
+        }
+
         return voting;
     }
 

@@ -1,6 +1,6 @@
 package org.cyanteam.telemaniacs.core.dto;
 
-import org.cyanteam.telemaniacs.core.enums.Sex;
+import org.cyanteam.telemaniacs.core.enums.Gender;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public class UserDTO {
     private Long id;
     private String username;
     private String passwordHash;
-    private Sex sex;
+    private Gender gender;
     private int age;
     private String email;
     private boolean isAdmin;
@@ -46,12 +46,12 @@ public class UserDTO {
         this.passwordHash = passwordHash;
     }
 
-    public Sex getSex() {
-        return sex;
+    public Gender getGender() {
+        return gender;
     }
 
-    public void setSex(Sex sex) {
-        this.sex = sex;
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 
     public int getAge() {

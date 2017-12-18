@@ -1,5 +1,6 @@
 package org.cyanteam.telemaniacs.core.facade;
 
+import org.cyanteam.telemaniacs.core.dto.ChannelCreateDTO;
 import org.cyanteam.telemaniacs.core.dto.ChannelDTO;
 import org.cyanteam.telemaniacs.core.enums.ChannelType;
 
@@ -8,6 +9,7 @@ import java.util.List;
 /**
  * Interface for channel operations.
  * Encapsulates channel services.
+ *
  * @author Tomas Milota
  */
 public interface ChannelFacade {
@@ -17,8 +19,9 @@ public interface ChannelFacade {
      *
      * @param channel entity that will be persisted
      * @throws IllegalArgumentException if channel is null
+     * @return ID of created channel
      */
-    void createChannel(ChannelDTO channel);
+    Long create(ChannelCreateDTO channel);
 
     /**
      * Updates persisted channel.
@@ -27,7 +30,7 @@ public interface ChannelFacade {
      * @throws IllegalArgumentException if channel is null
      * @throws IllegalArgumentException if channel is not stored in the database
      */
-    void updateChannel(ChannelDTO channel);
+    void update(ChannelDTO channel);
 
     /**
      * Removes channel
@@ -36,7 +39,7 @@ public interface ChannelFacade {
      * @throws IllegalArgumentException if channel is null
      * @throws IllegalArgumentException if channel is not stored in the database
      */
-    void removeChannel(ChannelDTO channel);
+    void remove(ChannelDTO channel);
 
     /**
      * Returns channel by id.
@@ -45,7 +48,7 @@ public interface ChannelFacade {
      * @return found entity
      * @throws IllegalArgumentException if id is null
      */
-    ChannelDTO findChannelById(Long id);
+    ChannelDTO findById(Long id);
 
     /**
      * Returns channel by name.
@@ -53,7 +56,7 @@ public interface ChannelFacade {
      * @param name name of the entity
      * @return found entity
      */
-    ChannelDTO findChannelByName(String name);
+    ChannelDTO findByName(String name);
 
     /**
      * Returns list of channels with given type.
@@ -61,13 +64,13 @@ public interface ChannelFacade {
      * @param type type of the channel
      * @return found entities
      */
-    List<ChannelDTO> findChannelsByType(ChannelType type);
+    List<ChannelDTO> findAllOfType(ChannelType type);
 
     /**
      * Returns all stored channels.
      *
      * @return all stored channels
      */
-    List<ChannelDTO> findAllChannels();
-    
+    List<ChannelDTO> findAll();
+
 }

@@ -1,0 +1,78 @@
+<section id="custom-header" data-size="5">
+    <div class="buttons">
+        <div class="pull-right">
+            <a href="#!/admin/transmissions" class="btn btn-primary">
+                <i class="fa fa-list"></i>
+                List
+            </a>
+        </div>
+    </div>
+</section>
+
+
+<main>
+    <div class="container">
+        <h2>
+            <span ng-if="transmission.id == null">Create Transmission</span>
+            <span ng-if="transmission.id != null">Edit Transmission</span>
+        </h2>
+
+        <tm-alerts></tm-alerts>
+
+        <form name="form" class="form-horizontal" novalidate>
+            <div class="form-group" ng-class="{ 'has-error': !(form.name.$valid) }">
+                <label for="name" class="control-label col-sm-2">Name</label>
+                <div class="col-sm-5">
+                    <input ng-model="transmission.name" id="name" name="name" type="text" class="form-control" required />
+                </div>
+                <div class="col-sm-5">
+                    <p ng-show="form.name.$error.required" class="help-block">Name is required.</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="description" class="control-label col-sm-2">Description</label>
+                <div class="col-sm-5">
+                    <textarea ng-model="transmission.description" id="description" name="description" class="form-control" rows="8" />
+                </div>
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-error': !(form.length.$valid) }">
+                <label for="length" class="control-label col-sm-2">Length</label>
+                <div class="col-sm-5">
+                    <input ng-model="transmission.length" id="length" name="length" type="number" class="form-control" min="0" />
+                </div>
+                <div class="col-sm-5">
+                    <p ng-show="form.length.$error.min" class="help-block">Length cannot be negative.</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="transmissionType" class="control-label col-sm-2">Transmission Type</label>
+                <div class="col-sm-5">
+                    <select ng-model="transmission.transmissionType" id="transmissionType" name="transmissionType" class="form-control">
+                        <option ng-repeat="transmissionType in transmissionTypes" value="{{ transmissionType.id }}">
+                            {{ transmissionType.name }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="name" class="control-label col-sm-2">Language</label>
+                <div class="col-sm-5">
+                    <input ng-model="transmission.language" id="language" name="language" type="text" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-10 col-sm-offset-2">
+                    <input type="hidden" name="id" ng-model="transmission.id" />
+                    <button ng-click="save(transmission)" ng-disabled="!form.$valid" class="btn btn-primary" type="submit">
+                        <i class="fa fa-save"></i> Save
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>

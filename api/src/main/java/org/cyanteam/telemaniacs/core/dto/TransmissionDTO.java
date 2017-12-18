@@ -17,7 +17,7 @@ public class TransmissionDTO {
 	private int length;
 	private String language;
 	private TransmissionType transmissionType;
-	private List<TransmissionOccurrenceDTO> occurrences;
+	private List<TransmissionTransmissionOccurrenceDTO> occurrences;
 	private List<VotingDTO> voting;
 
 	public Long getId() {
@@ -70,11 +70,11 @@ public class TransmissionDTO {
 		this.transmissionType = transmissionType;
 	}
 
-	public List<TransmissionOccurrenceDTO> getOccurrences() {
+	public List<TransmissionTransmissionOccurrenceDTO> getOccurrences() {
 		return occurrences;
 	}
 
-	public void setOccurrences(List<TransmissionOccurrenceDTO> occurrences) {
+	public void setOccurrences(List<TransmissionTransmissionOccurrenceDTO> occurrences) {
 		this.occurrences = occurrences;
 	}
 

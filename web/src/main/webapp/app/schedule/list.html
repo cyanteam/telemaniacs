@@ -1,0 +1,168 @@
+<section id="custom-header" data-size="9">
+    <div class="col-md-7 links">
+        <ul ng-if="pageService.isLoggedIn()">
+            <li>
+                <a href="#!/schedule?channels=my&offset={{offsetView}}" ng-class="channelsView === 'my' ? 'selected' : ''">My channels</a>
+            </li>
+
+            <li>
+                <a href="#!/schedule?channels=all&offset={{offsetView}}" ng-class="channelsView === 'all' ? 'selected' : ''">All channels</a>
+            </li>
+        </ul>
+
+        <ul ng-if="!pageService.isLoggedIn()">
+            <li>
+                <a href="#!/channels" class="selected">All channels</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="col-md-5 buttons">
+        <div class="pull-right">
+            <a href="#!/user-profile/channels" class="btn btn-primary" ng-if="pageService.isLoggedIn()">
+                <i class="fa fa-plus"></i>
+                Add channel
+            </a>
+
+            <a href="#!/login" class="btn btn-primary" ng-if="!pageService.isLoggedIn()">
+                <i class="fa fa-user"></i>
+                Log In
+            </a>
+        </div>
+    </div>
+</section>
+
+<section id="custom-panel">
+    <div id="pick-date">
+        <a href="#!/schedule?channels={{channelsView}}&offset={{offsetView - 1}}" title="Previous"><i class="fa fa-arrow-left"></i></a>
+        <strong>{{ currentDate | date: 'EEEE' }}.</strong> {{ currentDate | date: 'MM/dd/yyyy' }}
+        <a href="#!/schedule?channels={{channelsView}}&offset={{offsetView + 1}}" title="Next"><i class="fa fa-arrow-right"></i></a>
+    </div>
+</section>
+
+
+<main id="schedule">
+    <div class="group channels">
+        <div class="column time-clue"></div>
+
+        <div class="column" ng-repeat="schedule in schedules">
+            <div class="channel">
+                {{schedule.channelName}}
+
+                <span ng-if="pageService.isLoggedIn()">
+                    <a href="#!/schedule?channels={{channelsView}}&offset={{offsetView}}" title="Follow Channel" class="follow"
+                       ng-if="followedChannels.indexOf(schedule.channelId) < 0"
+                       ng-click="followChannel(schedule.channelId)">
+                        <i class="fa fa-heart"></i>
+                    </a>
+
+                    <a href="#!/schedule?channels={{channelsView}}&offset={{offsetView}}" title="Unfollow Channel" class="unfollow"
+                       ng-if="followedChannels.indexOf(schedule.channelId) > -1"
+                       ng-click="unfollowChannel(schedule.channelId)">
+                        <i class="fa fa-heart-o"></i>
+                    </a>
+                </span>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="group now" ng-if="offsetView == 0">
+        <div class="column time-clue"></div>
+
+        <div class="column" ng-repeat="schedule in schedules">
+            <div ng-class="{transmission: true, followed: followedTransmissions.indexOf(running[schedule.channelId].transmission.id) > -1}" ng-show="running[schedule.channelId] != null">
+                <div class="heading">
+                    <div class="time">Now</div>
+
+                    <div class="status">
+                        <div class="progress">
+                            <div class="progress-bar" style="width: {{ progress[schedule.channelId] }}%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>
+                    <a href="#!/details/{{ running[schedule.channelId].transmission.id }}">
+                        {{ running[schedule.channelId].transmission.name }}
+                        <span ng-if="running[schedule.channelId].partName != null && running[schedule.channelId].partName != ''">
+                            ({{ running[schedule.channelId].partName }})
+                        </span>
+                    </a>
+                </h3>
+
+                <div class="info">
+                    <div class="type">
+                        <span>{{ telemaniacs.transmissionTypeName(running[schedule.channelId].transmission.transmissionType) }}</span>
+                    </div>
+                    <div class="attributes">
+                        <span data-toggle="tooltip" title="Language">{{ running[schedule.channelId].transmission.language }}</span>
+                        <span data-toggle="tooltip" title="Rerun" ng-if="running[schedule.channelId].rerun"><i class="fa fa-refresh"></i></span>
+                    </div>
+                </div>
+
+                <div class="description">
+                    {{ running[schedule.channelId].transmission.description.substr(0, 100) }}...
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="group"  ng-repeat="hour in timeline">
+        <div class="column time-clue">
+            <div>{{hour}}:00</div>
+        </div>
+
+        <div class="column" ng-repeat="schedule in schedules">
+            <div class="transmission">
+                <div class="transmission" ng-repeat="occurrence in schedule.byTime[hour]">
+                    <div class="heading">
+                        <div class="time">{{ occurrence.startDate | date: 'HH:mm' }}</div>
+
+                        <div class="options">
+                            <a href="#!/details/{{ occurrence.transmission.id }}" data-toggle="tooltip" title="Details"><i class="fa fa-info-circle"></i></a>
+
+                            <span ng-if="pageService.isLoggedIn()">
+                                <a href="#!/schedule?channels={{channelsView}}&offset={{offsetView}}" title="Follow" class="follow"
+                                   ng-if="followedTransmissions.indexOf(occurrence.transmission.id) < 0"
+                                   ng-click="followTransmission(occurrence.transmission.id)">
+                                    <i class="fa fa-star"></i>
+                                </a>
+
+                                <a href="#!/schedule?channels={{channelsView}}&offset={{offsetView}}" title="Unfollow" class="unfollow"
+                                   ng-if="followedTransmissions.indexOf(occurrence.transmission.id) > -1"
+                                   ng-click="unfollowTransmission(occurrence.transmission.id)">
+                                    <i class="fa fa-star-o"></i>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+
+                    <h3>
+                        <a href="#!/details/{{ occurrence.transmission.id }}">
+                            {{ occurrence.transmission.name }}
+                            <span ng-if="occurrence.partName !== null && occurrence.partName != ''">
+                                ({{ occurrence.partName }})
+                            </span>
+                        </a>
+                    </h3>
+
+                    <div class="info">
+                        <div class="type">
+                            <span>{{ telemaniacs.transmissionTypeName(occurrence.transmission.transmissionType) }}</span>
+                        </div>
+                        <div class="attributes">
+                            <span data-toggle="tooltip" title="Language">{{ occurrence.transmission.language }}</span>
+                            <span data-toggle="tooltip" title="Rerun" ng-if="occurrence.rerun"><i class="fa fa-refresh"></i></span>
+                        </div>
+                    </div>
+
+                    <div class="description">
+                        {{ occurrence.transmission.description.substr(0, 100) }}...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

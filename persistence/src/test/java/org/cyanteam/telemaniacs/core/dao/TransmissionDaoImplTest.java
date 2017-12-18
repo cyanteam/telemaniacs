@@ -4,7 +4,7 @@ import org.cyanteam.telemaniacs.core.PersistenceContextConfiguration;
 import org.cyanteam.telemaniacs.core.entities.*;
 import org.cyanteam.telemaniacs.core.enums.AgeAvailability;
 import org.cyanteam.telemaniacs.core.enums.ChannelType;
-import org.cyanteam.telemaniacs.core.enums.Sex;
+import org.cyanteam.telemaniacs.core.enums.Gender;
 import org.cyanteam.telemaniacs.core.enums.TransmissionType;
 import org.cyanteam.telemaniacs.core.helpers.TransmissionBuilder;
 import org.junit.Before;
@@ -319,7 +319,7 @@ public class TransmissionDaoImplTest {
         User user = new User();
         user.setUsername("novakjan");
         user.setPasswordHash("password");
-        user.setSex(Sex.MALE);
+        user.setGender(Gender.MALE);
         user.setAge(40);
         user.setEmail("jan@novak.net");
 

@@ -4,7 +4,7 @@ import org.cyanteam.telemaniacs.core.PersistenceContextConfiguration;
 import org.cyanteam.telemaniacs.core.entities.Transmission;
 import org.cyanteam.telemaniacs.core.entities.User;
 import org.cyanteam.telemaniacs.core.entities.Voting;
-import org.cyanteam.telemaniacs.core.enums.Sex;
+import org.cyanteam.telemaniacs.core.enums.Gender;
 import org.cyanteam.telemaniacs.core.helpers.TransmissionBuilder;
 import org.junit.Before;
 import org.junit.Test;
@@ -57,7 +57,7 @@ public class VotingDaoTest {
         user.setUsername("user");
         user.setEmail("user@mail.com");
         user.setAge(20);
-        user.setSex(Sex.MALE);
+        user.setGender(Gender.MALE);
         user.setPasswordHash("passwordHash");
         userDao.create(user);
 

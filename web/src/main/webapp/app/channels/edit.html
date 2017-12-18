@@ -1,0 +1,61 @@
+<section id="custom-header" data-size="5">
+    <div class="buttons">
+        <div class="pull-right">
+            <a href="#!/admin/channels" class="btn btn-primary">
+                <i class="fa fa-list"></i>
+                List
+            </a>
+        </div>
+    </div>
+</section>
+
+
+<main>
+    <div class="container">
+        <h2>
+            <span ng-if="channel.id == null">Create Channel</span>
+            <span ng-if="channel.id != null">Edit Channel</span>
+        </h2>
+
+        <tm-alerts></tm-alerts>
+
+        <form name="form" class="form-horizontal" novalidate>
+            <div class="form-group" ng-class="{ 'has-error': !(form.name.$valid) }">
+                <label for="name" class="control-label col-sm-2">Name</label>
+                <div class="col-sm-5">
+                    <input ng-model="channel.name" id="name" name="name" type="text" class="form-control" required />
+                </div>
+                <div class="col-sm-5">
+                    <p ng-show="form.name.$error.required" class="help-block">Name is required.</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="channelType" class="control-label col-sm-2">Channel Type</label>
+                <div class="col-sm-5">
+                    <select ng-model="channel.channelType" id="channelType" name="channelType" class="form-control">
+                        <option ng-repeat="channelType in channelTypes" value="{{ channelType.id }}">
+                            {{ channelType.name }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="name" class="control-label col-sm-2">Language</label>
+                <div class="col-sm-5">
+                    <input ng-model="channel.language" id="language" name="language" type="text" class="form-control" required />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-10 col-sm-offset-2">
+                    <input type="hidden" name="id" ng-model="channel.id" />
+                    <button ng-click="save(channel)" ng-disabled="!form.$valid" class="btn btn-primary" type="submit">
+                        <i class="fa fa-save"></i> Save
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>

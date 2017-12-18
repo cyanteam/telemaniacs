@@ -2,6 +2,7 @@ package org.cyanteam.telemaniacs.core.enums;
 
 /**
  * Enum class for age availability
+ *
  * @author Simona Tinkova
  */
 public enum AgeAvailability {
