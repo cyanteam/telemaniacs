@@ -120,7 +120,7 @@ telemaniacsApp.factory('PageService', function ($rootScope, $http, $location) {
                             $location.path('schedule');
                         });
                     }, function (reason) {
-                        _this.pushErrorMessage('User authorization failed. Wrong email or password');
+                        _this.pushErrorMessage('User authentication failed. Wrong email or password');
                         _this.consumeMessages();
                     }
                 )

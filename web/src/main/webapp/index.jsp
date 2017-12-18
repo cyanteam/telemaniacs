@@ -40,7 +40,7 @@
     <script src="app/channels/myChannelController.js"></script>
     <script src="app/transmission/myTransmissionController.js"></script>
     <script src="app/transmissionOccurrence/myOccurrencesController.js"></script>
-    <script src="app/login/controller.js"></script>
+    <script src="app/user/controller.js"></script>
 </body>
 
 </html>

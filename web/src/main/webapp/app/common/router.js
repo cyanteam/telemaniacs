@@ -70,12 +70,17 @@ telemaniacsApp.config(function($routeProvider) {
 
         .when('/login', {
             controller: 'LoginController',
-            templateUrl: 'app/login/login.html'
+            templateUrl: 'app/user/login.html'
         })
 
         .when('/user-profile/logout', {
             controller: 'LogoutController',
-            templateUrl: 'app/login/logout.html'
+            templateUrl: 'app/user/logout.html'
+        })
+
+        .when('/user-profile/registration', {
+            controller: 'RegistrationController',
+            templateUrl: 'app/user/registration.html'
         })
 
         .otherwise({ redirectTo: '/schedule' });

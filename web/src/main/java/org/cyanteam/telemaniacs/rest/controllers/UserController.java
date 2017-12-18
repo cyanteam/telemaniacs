@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import org.cyanteam.telemaniacs.core.dto.ChannelDTO;
 import org.cyanteam.telemaniacs.core.dto.TransmissionDTO;
 import org.cyanteam.telemaniacs.core.dto.UserAuthenticationDTO;
+import org.cyanteam.telemaniacs.core.dto.UserCreateDTO;
 import org.cyanteam.telemaniacs.core.dto.UserDTO;
 import org.cyanteam.telemaniacs.core.dto.UserVotingDto;
 import org.cyanteam.telemaniacs.core.facade.UserFacade;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * Controller for user.
  * @author Miroslav Kubus
+ * @author Tomas Milota
  */
 @RestController
 @RequestMapping(Url.USER)
@@ -84,10 +86,19 @@ public class UserController {
         return favoriteTransmissions;
     }
 
+    @RequestMapping(value = "/add", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void createUser(@RequestBody @Valid UserCreateDTO userCreateDTO, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            throw new ValidationException("Invalid user state.");
+        }
+
+        userFacade.create(userCreateDTO);
+    }
+
     @RequestMapping(value = "/email/{email}/", method = RequestMethod.GET)
     public UserDTO getUserByEmail(@PathVariable("email") String email) {
-        UserDTO user = userFacade.findByEmail(email);
-        return user;
+        return userFacade.findByEmail(email);
     }
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)

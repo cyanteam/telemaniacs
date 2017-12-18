@@ -4,6 +4,7 @@ import java.util.List;
 import javax.naming.AuthenticationException;
 
 import org.cyanteam.telemaniacs.core.dto.UserAuthenticationDTO;
+import org.cyanteam.telemaniacs.core.dto.UserCreateDTO;
 import org.cyanteam.telemaniacs.core.dto.UserDTO;
 
 /**
@@ -17,10 +18,9 @@ public interface UserFacade {
     /**
      * Create new user in the system
      *
-     * @param userDTO  to be created/registered
-     * @param password of new user
+     * @param userCreateDTO  to be created/registered
      */
-    void create(UserDTO userDTO, String password);
+    void create(UserCreateDTO userCreateDTO);
 
     /**
      * Update user information

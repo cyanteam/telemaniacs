@@ -2,6 +2,7 @@ package org.cyanteam.telemaniacs.core.facades;
 
 import org.cyanteam.telemaniacs.core.ServiceContextConfiguration;
 import org.cyanteam.telemaniacs.core.dto.UserAuthenticationDTO;
+import org.cyanteam.telemaniacs.core.dto.UserCreateDTO;
 import org.cyanteam.telemaniacs.core.dto.UserDTO;
 import org.cyanteam.telemaniacs.core.entities.User;
 import org.cyanteam.telemaniacs.core.helpers.UserBuilder;
@@ -71,10 +72,11 @@ public class UserFacadeImplTest {
 
     @Test
     public void createUserTest() {
-        UserDTO userDTO = new UserDTO();
-        userDTO.setUsername("TestName");
+        UserCreateDTO userCreateDTO = new UserCreateDTO();
+        userCreateDTO.setUsername("TestName");
+        userCreateDTO.setEncryptedPassword(youngUser.getPasswordHash());
 
-        userFacade.create(userDTO, youngUser.getPasswordHash());
+        userFacade.create(userCreateDTO);
         verify(userService).create(any(User.class), any(String.class));
     }
 

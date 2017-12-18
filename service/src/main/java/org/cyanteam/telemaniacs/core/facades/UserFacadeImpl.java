@@ -4,6 +4,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.cyanteam.telemaniacs.core.dto.UserAuthenticationDTO;
+import org.cyanteam.telemaniacs.core.dto.UserCreateDTO;
 import org.cyanteam.telemaniacs.core.dto.UserDTO;
 import org.cyanteam.telemaniacs.core.entities.User;
 import org.cyanteam.telemaniacs.core.facade.UserFacade;
@@ -29,11 +30,10 @@ public class UserFacadeImpl implements UserFacade {
     private ObjectMapperService objectMapperService;
 
     @Override
-    public void create(UserDTO userDTO, String password) {
-        User user = prepareUser(userDTO);
+    public void create(UserCreateDTO userCreateDTO) {
+        User user = prepareUser(userCreateDTO);
 
-        userService.create(user, password);
-        userDTO.setId(user.getId());
+        userService.create(user, userCreateDTO.getEncryptedPassword());
     }
 
     @Override
@@ -120,5 +120,13 @@ public class UserFacadeImpl implements UserFacade {
         }
 
         return objectMapperService.map(userDTO, User.class);
+    }
+
+    private User prepareUser(UserCreateDTO userCreateDTO) {
+        if (userCreateDTO == null) {
+            throw new IllegalArgumentException("UserCreateDTO cannot be null!");
+        }
+
+        return objectMapperService.map(userCreateDTO, User.class);
     }
 }

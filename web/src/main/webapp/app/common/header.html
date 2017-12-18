@@ -61,6 +61,12 @@
                         </a>
                     </li>
 
+                    <li class="action" ng-if="!$ctrl.pageService.isLoggedIn()">
+                        <a class="user" href="#!/user-profile/registration">
+                            Registration
+                        </a>
+                    </li>
+
                     <li class="dropdown" ng-if="$ctrl.pageService.isLoggedIn()">
                         <a class="user dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             {{ $ctrl.pageService.getUser().username }} <span class="caret"></span>
