@@ -8,7 +8,7 @@ import java.util.List;
  * @author Tomas Milota
  */
 public class TransmissionCreateDTO {
-
+    private Long id;
     private String name;
     private String description;
     private int length;
@@ -55,4 +55,11 @@ public class TransmissionCreateDTO {
         this.transmissionType = transmissionType;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

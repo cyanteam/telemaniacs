@@ -164,7 +164,7 @@ public class TransmissionController {
 	}
 
 	@RequestMapping(value = "/occurrence/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void updateOccurrence(@PathVariable("id") long id,
+	public TransmissionOccurrenceCreateDTO updateOccurrence(@PathVariable("id") long id,
 	                                @RequestBody @Valid TransmissionOccurrenceCreateDTO occurrenceDTO,
 	                                BindingResult bindingResult) {
 
@@ -174,6 +174,7 @@ public class TransmissionController {
 
 		occurrenceDTO.setId(id);
 		transmissionFacade.updateOccurrence(occurrenceDTO);
+		return occurrenceDTO;
 	}
 
 	@RequestMapping(value = "/occurrence/{id}", method = RequestMethod.DELETE)
@@ -183,12 +184,7 @@ public class TransmissionController {
 
 	@RequestMapping(value = "/{id}/votings", method = RequestMethod.GET)
 	public List<VotingDTO> getVotings(@PathVariable("id") long id) {
-		TransmissionDTO transmissionDTO = transmissionFacade.findById(id);
-		if (transmissionDTO == null) {
-			throw new ResourceNotFoundException("Transmission", id);
-		}
-
-		return transmissionFacade.getVotings(transmissionDTO);
+		return transmissionFacade.getVotings(id);
 	}
 
 	@RequestMapping(value = "/{id}/rank", method = RequestMethod.GET)

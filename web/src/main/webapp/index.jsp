@@ -25,6 +25,7 @@
     <script src="lib/bootstrap/js/bootstrap.min.js"></script>
     <script src="lib/angular/angular.min.js"></script>
     <script src="lib/angular/angular-route.min.js"></script>
+    <script src="lib/angular/angular-cookies.min.js"></script>
     <script src="media/telemaniacs.js"></script>
 
     <!-- AngularJS -->

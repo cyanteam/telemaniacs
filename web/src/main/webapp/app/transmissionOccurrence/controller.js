@@ -6,6 +6,7 @@ telemaniacsApp.controller('TransmissionOccurrencesListController', [
     'PageService',
 
     function ($scope, $route, $routeParams, $location, pageService) {
+        pageService.requireAdmin();
         pageService.consumeMessages();
         pageService.setPageName('Occurrence Administration');
 
@@ -40,6 +41,7 @@ telemaniacsApp.controller('TransmissionOccurrencesCreateController', [
     'PageService',
 
     function ($scope, $route, $routeParams, $location, $filter, pageService) {
+        pageService.requireAdmin();
         pageService.consumeMessages();
         pageService.setPageName('Occurrence Administration');
 

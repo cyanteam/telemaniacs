@@ -3,7 +3,7 @@ var telemaniacs = {
      * AngularJS application
      */
     app: function () {
-        return angular.module('telemaniacsApp', [ 'ngRoute' ]);
+        return angular.module('telemaniacsApp', [ 'ngRoute', 'ngCookies' ]);
     },
 
     /**

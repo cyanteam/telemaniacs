@@ -147,12 +147,12 @@ public class TransmissionFacadeImpl implements TransmissionFacade {
     }
 
     @Override
-    public List<VotingDTO> getVotings(TransmissionDTO transmissionDTO) {
-        if (transmissionDTO == null) {
-            throw new IllegalArgumentException("Transmission cannot be null!");
+    public List<VotingDTO> getVotings(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException("Transmission ID cannot be null!");
         }
-        Transmission transmission = prepareTransmission(transmissionDTO);
 
+        Transmission transmission = transmissionService.findById(id);
         List<Voting> votings = transmissionService.getVotings(transmission);
 
         return objectMapperService.map(votings, VotingDTO.class);

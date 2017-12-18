@@ -6,6 +6,7 @@ telemaniacsApp.controller('upcomingTransmissionsController', [
     'PageService',
 
     function ($scope, $route, $routeParams, $location, pageService) {
+        pageService.requireLogin();
         pageService.consumeMessages();
         pageService.setPageName('Upcoming favorite transmissions');
 

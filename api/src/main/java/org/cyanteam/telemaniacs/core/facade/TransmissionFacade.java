@@ -110,10 +110,10 @@ public interface TransmissionFacade {
     /**
      * Get all votings of a transmission
      *
-     * @param transmissionDTO Transmission
+     * @param id Transmission
      * @return List of all votings of given transmission
      */
-    List<VotingDTO> getVotings(TransmissionDTO transmissionDTO);
+    List<VotingDTO> getVotings(Long id);
 
     /**
      * Get average voting of a transmission

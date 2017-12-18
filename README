@@ -1,0 +1,14 @@
+Pre-filled users
+---------------
+* Regular user - username: pepa@telemaniacs.com, password: pepa
+* Administrator - username: admin@telemaniacs.com, password: admin
+
+REST API
+--------
+Can be tested in regular way
+
+Example:
+* List of all channels - http://localhost:8080/pa165/rest/channel (GET method)
+* Details of a single channel - http://localhost:8080/pa165/rest/channel/{ID} (GET method, you can try ID 1)
+
+Full specification available at https://github.com/cyanteam/telemaniacs/wiki/REST-API

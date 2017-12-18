@@ -7,10 +7,28 @@ telemaniacsApp.controller('TransmissionDetailsController', [
 
     function ($scope, $route, $routeParams, $location, pageService) {
         pageService.setPageName('Show Details');
+
+        pageService.getDataAsync('transmission/' + $routeParams.id + '/votings').then(function (votings) {
+            $scope.votings = votings;
+        });
+
         pageService.getDataAsync('transmission/' + $routeParams.id).then(function (transmission) {
             $scope.transmission = transmission;
             console.log($scope.transmission);
         });
+
+        $scope.myVoting = {
+            'comment': ''
+        };
+        $scope.saveComment = function (transmissionId, myVoting) {
+            var errorMessages = {
+                'ValidationException': 'Invalid rating.',
+                'otherwise': 'Rating cannot be created: {msg}'
+            };
+
+            pageService.sendDataAsync('user/' + pageService.getUser().id + '/vote-for/' + transmissionId, 'PUT', myVoting, 'Transmission was added.',
+                'details/' + transmissionId, errorMessages, { generation: Date.now() });
+        }
     }
 ]);
 
@@ -87,6 +105,8 @@ telemaniacsApp.controller('TransmissionsListController', [
             var errorMessages = {
                 'otherwise': 'Transmission cannot be deleted: {msg}'
             };
+
+            console.log(transmission.id);
 
             pageService.sendDataAsync('transmission/' + transmission.id, 'DELETE', transmission, 'Transmission was deleted.',
                     'admin/transmissions/', errorMessages);

@@ -1,4 +1,4 @@
-telemaniacsApp.factory('PageService', function ($rootScope, $http, $location) {
+telemaniacsApp.factory('PageService', function ($rootScope, $http, $location, $cookies) {
     var _title = '';
     var _pageName = '';
     var _useSchedulerLayout = false;
@@ -92,11 +92,17 @@ telemaniacsApp.factory('PageService', function ($rootScope, $http, $location) {
         },
 
         getUser: function () {
+            var cookieUser = $cookies.getObject('user');
+            if (cookieUser != null && cookieUser.id > 0) {
+                return cookieUser;
+            }
+
             return $rootScope.user;
         },
 
         setUser: function (user) {
             $rootScope.user = user;
+            $cookies.putObject('user', user);
         },
 
         isLoggedIn: function () {
@@ -114,22 +120,35 @@ telemaniacsApp.factory('PageService', function ($rootScope, $http, $location) {
                 method: 'POST',
                 data: userAuthenticate
             })
-                .then(function (response) {
-                        _this.getDataAsync('user/email/' + userAuthenticate.email + '/').then(function (user) {
-                            _this.setUser(user);
-                            $location.path('schedule');
-                        });
-                    }, function (reason) {
-                        _this.pushErrorMessage('User authentication failed. Wrong email or password');
-                        _this.consumeMessages();
-                    }
-                )
+            .then(function (response) {
+                    _this.getDataAsync('user/email/' + userAuthenticate.email + '/').then(function (user) {
+                        _this.setUser(user);
+                        $location.path('schedule');
+                    });
+                }, function (reason) {
+                    _this.pushErrorMessage('User authentication failed. Wrong email or password');
+                    _this.consumeMessages();
+                }
+            )
         },
 
         logout: function () {
             this.setUser(undefined);
+            $cookies.remove('user');
             this.pushSuccessMessage('Successfully logged out.');
             $location.path('schedule');
+        },
+
+        requireLogin: function() {
+            if (!this.isLoggedIn()) {
+                $location.path('schedule');
+            }
+        },
+
+        requireAdmin: function() {
+            if (!this.isAdministrator()) {
+                $location.path('schedule');
+            }
         }
     };
 });

@@ -112,6 +112,7 @@ public class UserProfileFacadeImpl implements UserProfileFacade {
             voting = new Voting();
         }
         setVoting(voting, user, transmission, userVoting);
+        voting.setIpAddress("127.0.0.1");
 
         if (voting.getId() == null) {
             votingService.create(voting);

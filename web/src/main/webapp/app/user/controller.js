@@ -16,18 +16,20 @@ telemaniacsApp.controller('LoginController', [
         };
     },
 
-])
+]);
 
 telemaniacsApp.controller('LogoutController', [
+    '$location',
     'PageService',
 
-    function (pageService) {
+    function ($location, pageService) {
         pageService.consumeMessages()
-
         pageService.logout();
+
+        $location.path('/');
     }
 
-])
+]);
 
 telemaniacsApp.controller('RegistrationController', [
     '$scope',
@@ -62,4 +64,4 @@ telemaniacsApp.controller('RegistrationController', [
             pageService.sendDataAsync('user/add', 'POST', userCreate, 'User was created', 'login', errorMessages);
         }
     }
-])
+]);

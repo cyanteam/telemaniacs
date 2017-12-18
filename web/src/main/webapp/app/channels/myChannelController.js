@@ -6,6 +6,7 @@ telemaniacsApp.controller('MyChannelController', [
     'PageService',
 
     function ($scope, $route, $routeParams, $location, pageService) {
+        pageService.requireLogin();
         pageService.consumeMessages();
         pageService.setPageName('Followed Channels');
 

@@ -24,7 +24,7 @@ public class ChannelController {
     @Inject
     private UserProfileFacade userProfileFacade;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public List<ChannelDTO> getAllChannels() {
         List<ChannelDTO> channels = channelFacade.findAll();
         
