@@ -121,10 +121,16 @@ telemaniacsApp.factory('PageService', function ($rootScope, $http, $location, $c
                 data: userAuthenticate
             })
             .then(function (response) {
-                    _this.getDataAsync('user/email/' + userAuthenticate.email + '/').then(function (user) {
-                        _this.setUser(user);
-                        $location.path('schedule');
-                    });
+                    if (response.data === true) {
+                        _this.getDataAsync('user/email/' + userAuthenticate.email + '/').then(function (user) {
+                            _this.setUser(user);
+                            $location.path('schedule');
+                        });
+                    }
+                    else {
+                        _this.pushErrorMessage('User authentication failed. Wrong email or password');
+                        _this.consumeMessages();
+                    }
                 }, function (reason) {
                     _this.pushErrorMessage('User authentication failed. Wrong email or password');
                     _this.consumeMessages();
