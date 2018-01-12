@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="lib/jquery/jquery.datetimepicker.min.css" />
     <link rel="stylesheet" href="media/style.css" />
 </head>
 
@@ -22,6 +23,7 @@
 
     <!-- Scripts -->
     <script src="lib/jquery/jquery-3.2.1.slim.min.js"></script>
+    <script src="lib/jquery/jquery.datetimepicker.min.js"></script>
     <script src="lib/bootstrap/js/bootstrap.min.js"></script>
     <script src="lib/angular/angular.min.js"></script>
     <script src="lib/angular/angular-route.min.js"></script>

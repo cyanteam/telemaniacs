@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.Cascade;
 import org.hibernate.validator.constraints.Email;
 
 import org.cyanteam.telemaniacs.core.enums.Gender;

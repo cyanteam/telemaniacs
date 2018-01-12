@@ -26,7 +26,7 @@ telemaniacsApp.controller('TransmissionDetailsController', [
                 'otherwise': 'Rating cannot be created: {msg}'
             };
 
-            pageService.sendDataAsync('user/' + pageService.getUser().id + '/vote-for/' + transmissionId, 'PUT', myVoting, 'Transmission was added.',
+            pageService.sendDataAsync('user/' + pageService.getUser().id + '/vote-for/' + transmissionId, 'PUT', myVoting, null,
                 'details/' + transmissionId, errorMessages, { generation: Date.now() });
         }
     }
@@ -94,6 +94,8 @@ telemaniacsApp.controller('TransmissionsListController', [
     '$scope',
     'PageService',
     function ($scope, pageService) {
+        $scope.telemaniacs = telemaniacs;
+
         pageService.consumeMessages();
         pageService.setPageName('Transmission Administration');
 
@@ -103,6 +105,7 @@ telemaniacsApp.controller('TransmissionsListController', [
 
         $scope.delete = function (transmission) {
             var errorMessages = {
+                'JpaSystemException': 'Transmission cannot be deleted since it\'s used by an user!',
                 'otherwise': 'Transmission cannot be deleted: {msg}'
             };
 

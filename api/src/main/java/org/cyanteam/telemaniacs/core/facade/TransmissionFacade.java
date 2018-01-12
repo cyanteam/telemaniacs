@@ -22,22 +22,22 @@ public interface TransmissionFacade {
     /**
      * The transmissionDTO will be deleted from system.
      *
-     * @param transmissionDTO represents entity that will be deleted from system
+     * @param id represents entity that will be deleted from system
      * @throws IllegalArgumentException if transmissionDTO for removing is not stored
      *                                  in the system or transmissionDTO is null.
      */
-    TransmissionDTO remove(TransmissionDTO transmissionDTO) throws IllegalArgumentException;
+    void remove(Long id) throws IllegalArgumentException;
 
     /**
      * The transmissionDTO will be updated in the system.
      *
      * @param transmissionDTO the transmissionDTO that will be updated in the system
-     * @return updated transmissionDTO
+     * @return updated transmission ID
      * @throws ConstraintViolationException if any constraints on columns
      *                                      are violated.
      * @throws IllegalArgumentException     if transmissionDTO for updating is not in the system.
      */
-    TransmissionDTO update(TransmissionDTO transmissionDTO) throws ConstraintViolationException, IllegalArgumentException;
+    Long update(TransmissionDTO transmissionDTO) throws ConstraintViolationException, IllegalArgumentException;
 
     /**
      * Returns the transmissionDTO with the specific id.
