@@ -6,7 +6,6 @@ telemaniacsApp.controller('ChannelsCreateController', [
     'PageService',
 
     function ($scope, $route, $routeParams, $location, pageService) {
-        pageService.requireAdmin();
         pageService.consumeMessages();
         pageService.setPageName('Channel Administration');
 

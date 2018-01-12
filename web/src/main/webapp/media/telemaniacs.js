@@ -3,7 +3,15 @@ var telemaniacs = {
      * AngularJS application
      */
     app: function () {
-        return angular.module('telemaniacsApp', [ 'ngRoute', 'ngCookies' ]);
+        return angular
+            .module('telemaniacsApp', [ 'ngRoute', 'ngCookies' ])
+            .run(["$rootScope", "PageService", function ($rootScope, pageService) {
+                $rootScope.$on("$routeChangeStart", function (evt, to, from) {
+                    if (to.$$route.originalPath.startsWith("/admin")) {
+                        pageService.requireAdmin();
+                    }
+                });
+            }]);
     },
 
     /**
