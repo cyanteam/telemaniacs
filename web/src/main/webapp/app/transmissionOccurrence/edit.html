@@ -43,18 +43,32 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" ng-class="{ 'has-error': !(form.startDate.$valid) }">
                 <label for="startDate" class="control-label col-sm-2">Start Date</label>
                 <div class="col-sm-5">
-                    <input ng-model="transmissionOccurrence.startDate" id="startDate" name="startDate" type="text"
-                           class="form-control" required placeholder="yyyy-mm-dd HH:mm" />
+                    <div class="row">
+                        <div class="col-sm-11">
+                            <input ng-model="transmissionOccurrence.startDate" id="startDate" name="startDate" type="text"
+                                   class="form-control datepicker" required placeholder="yyyy-mm-dd HH:mm" ng-pattern="dateRegex" />
+                        </div>
+
+                        <div class="col-sm-1">
+                            <button class="btn btn-default pull-right" id="show-picker">
+                                <i class="fa fa-calendar"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <p ng-show="form.startDate.$error.required" class="help-block">Start date is required.</p>
+                    <p ng-show="form.startDate.$error.pattern" class="help-block">Invalid format of start date (must be yyyy-mm-dd HH:mm).</p>
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-sm-5 col-sm-offset-2">
                     <label>
-                        <input type="checkbox" ng-model="transmissionOccurrence.isRerun" ng-checked="transmissionOccurrence.rerun"> Is rerun?
+                        <input type="checkbox" ng-model="transmissionOccurrence.rerun" ng-checked="transmissionOccurrence.rerun"> Is rerun?
                     </label>
                 </div>
             </div>

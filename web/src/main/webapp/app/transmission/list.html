@@ -30,7 +30,7 @@
             <tr ng-repeat="transmission in transmissions track by $index">
                 <td>{{transmission.id}}</td>
                 <td>{{transmission.name}}</td>
-                <td>{{transmission.transmissionType}}</td>
+                <td>{{ telemaniacs.transmissionTypeName(transmission.transmissionType) }}</td>
                 <td>{{transmission.length}}</td>
                 <td>{{transmission.language}}</td>
                 <td>

@@ -55,10 +55,10 @@ public class TransmissionController {
 	 *
 	 * @param id ID of updated transmission
 	 * @param transmissionDTO transmission with modified values
-	 * @return updated transmission
+	 * @return updated transmission id
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public TransmissionDTO updateTransmission(@PathVariable("id") long id,
+	public Long updateTransmission(@PathVariable("id") long id,
 											  @RequestBody @Valid TransmissionDTO transmissionDTO,
 											  BindingResult bindingResult) {
 		log.debug("rest updateTransmission({})");
@@ -74,13 +74,7 @@ public class TransmissionController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public final void deleteTransmission(@PathVariable("id") long id) throws Exception {
 		log.debug("rest deleteTransmission({})", id);
-
-		TransmissionDTO transmissionDTO = transmissionFacade.findById(id);
-		if (transmissionDTO == null) {
-			throw new ResourceNotFoundException("Transmission", id);
-		}
-
-		transmissionFacade.remove(transmissionDTO);
+		transmissionFacade.remove(id);
 	}
 
 	/**

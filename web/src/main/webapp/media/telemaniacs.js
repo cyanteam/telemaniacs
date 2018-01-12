@@ -74,6 +74,20 @@ var telemaniacs = {
     },
 
     /**
+     * Channel type name
+     */
+    channelTypeName: function(type) {
+        switch (type) {
+            case 'SPORT': return 'Sport';
+            case 'MUSIC': return 'Music';
+            case 'DOCUMENTARY': return 'Documentary';
+            case 'MOVIE': return 'Movie';
+            case 'COMMERCE': return 'Commerce';
+            case 'CHILDREN': return 'Children';
+        }
+    },
+
+    /**
      * Transmission type name
      */
     transmissionTypeName: function(type) {
@@ -107,6 +121,14 @@ var telemaniacs = {
 
         // Initializes Bootstrap tooltips
         $('[data-toggle="tooltip"]').tooltip();
+
+        $('.datepicker').datetimepicker({
+            format:'Y-m-d H:m'
+        });
+
+        $('#show-picker').click(function() {
+            $('.datepicker').datetimepicker('show');
+        });
     }
 };
 

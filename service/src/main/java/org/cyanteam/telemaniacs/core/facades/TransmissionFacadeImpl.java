@@ -46,19 +46,16 @@ public class TransmissionFacadeImpl implements TransmissionFacade {
     }
 
     @Override
-    public TransmissionDTO remove(TransmissionDTO transmissionDTO) throws IllegalArgumentException {
-        Transmission transmission = prepareTransmission(transmissionDTO);
-
+    public void remove(Long id) throws IllegalArgumentException {
+        Transmission transmission = transmissionService.findById(id);
         transmissionService.remove(transmission);
-        return transmissionDTO;
     }
 
     @Override
-    public TransmissionDTO update(TransmissionDTO transmissionDTO) throws ConstraintViolationException, IllegalArgumentException {
-        Transmission transmission = prepareTransmission(transmissionDTO);
-
+    public Long update(TransmissionDTO transmissionDTO) throws ConstraintViolationException, IllegalArgumentException {
+        Transmission transmission = prepareTransmissionUpdate(transmissionDTO);
         transmissionService.update(transmission);
-        return transmissionDTO;
+        return transmission.getId();
     }
 
     @Override
@@ -191,12 +188,23 @@ public class TransmissionFacadeImpl implements TransmissionFacade {
         return objectMapperService.map(transmissionDTO, Transmission.class);
     }
 
-    private TransmissionOccurrence prepareTransmissionOccurence(TransmissionOccurrenceDTO occurenceDTO) {
-        if (occurenceDTO == null) {
-            throw new IllegalArgumentException("TransmissionOccurenceDTO cannot be null!");
+    private Transmission prepareTransmissionUpdate(TransmissionDTO transmissionDTO) {
+        if (transmissionDTO == null || transmissionDTO.getId() == null) {
+            throw new IllegalArgumentException("TransmissionDTO cannot be null!");
         }
 
-        return objectMapperService.map(occurenceDTO, TransmissionOccurrence.class);
+        Transmission transmission = transmissionService.findById(transmissionDTO.getId());
+        if (transmission == null) {
+            throw new IllegalArgumentException("Updated transmission does not exist!");
+        }
+
+        transmission.setName(transmissionDTO.getName());
+        transmission.setDescription(transmissionDTO.getDescription());
+        transmission.setLength(transmissionDTO.getLength());
+        transmission.setLanguage(transmissionDTO.getLanguage());
+        transmission.setTransmissionType(transmissionDTO.getTransmissionType());
+
+        return transmission;
     }
 
     private TransmissionOccurrence prepareTransmissionOccurenceCreate(TransmissionOccurrenceCreateDTO occurenceDTO) {

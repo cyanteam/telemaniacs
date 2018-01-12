@@ -9,6 +9,8 @@ telemaniacsApp.controller('MyTransmissionController', [
     'PageService',
 
     function ($scope, $route, $routeParams, $location, pageService) {
+        $scope.telemaniacs = telemaniacs;
+
         pageService.requireLogin();
         pageService.consumeMessages();
         pageService.setPageName('Followed Shows');

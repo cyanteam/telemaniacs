@@ -28,7 +28,7 @@
                 <tr ng-repeat="channel in channels">
                     <td>{{ $index + 1}}</td>
                     <td>{{ channel.name}}</td>
-                    <td>{{ channel.channelType}}</td>
+                    <td>{{ telemaniacs.channelTypeName(channel.channelType) }}</td>
                     <td>{{ channel.language}}</td>
 
                     <td>
