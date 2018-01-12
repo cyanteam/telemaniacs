@@ -183,11 +183,6 @@ public class TransmissionController {
 
 	@RequestMapping(value = "/{id}/rank", method = RequestMethod.GET)
 	public Double getAverageRank(@PathVariable("id") long id) {
-		TransmissionDTO transmissionDTO = transmissionFacade.findById(id);
-		if (transmissionDTO == null) {
-			throw new ResourceNotFoundException("Transmission", id);
-		}
-
-		return transmissionFacade.getAverageVoting(transmissionDTO);
+		return transmissionFacade.getAverageVoting(id);
 	}
 }

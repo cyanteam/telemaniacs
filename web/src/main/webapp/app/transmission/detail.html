@@ -10,16 +10,26 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-6"><b><i>Length</i></b>
+                    <div class="col-md-3"><b><i>Type</i></b>
                     </div>
-                    <div class="col-md-6"><b><i>Language</i></b>
+                    <div class="col-md-3"><b><i>Length</i></b>
+                    </div>
+                    <div class="col-md-3"><b><i>Language</i></b>
+                    </div>
+                    <div class="col-md-3"><b><i>Average Rating</i></b>
                     </div>
                 </div>
 
                 <div class="row" style="margin-top: 10px">
-                    <div class="col-md-6">{{ transmission.length }}
+                    <div class="col-md-3">{{ telemaniacs.transmissionTypeName(transmission.transmissionType) }}
                     </div>
-                    <div class="col-md-6">{{ transmission.language }}
+                    <div class="col-md-3">{{ transmission.length }}
+                    </div>
+                    <div class="col-md-3">{{ transmission.language }}
+                    </div>
+                    <div class="col-md-3">
+                        <span style="font-size: 18px; font-weight: bold">{{ rank | number: 1 }}</span>
+                        of 5
                     </div>
                 </div>
 
@@ -73,10 +83,27 @@
                         </div>
 
                         <div class="form-group">
+                            <input type="hidden" name="rank" id="rank" ng-model="transmission.rank" />
                             <input type="hidden" name="id" ng-model="transmission.id" />
-                            <button ng-click="saveComment(transmission.id, myVoting)" ng-disabled="!form.$valid" class="btn btn-primary" type="submit">
-                                <i class="fa fa-save"></i> Save
-                            </button>
+
+                            <div class="row">
+                                <div class="col-md-6" id="rank-bar">
+                                    <a href="#" id="rank-star-1" ng-click="setRank(1)"><i class="fa fa-star-o"></i></a>
+                                    <a href="#" id="rank-star-2" ng-click="setRank(2)"><i class="fa fa-star-o"></i></a>
+                                    <a href="#" id="rank-star-3" ng-click="setRank(3)"><i class="fa fa-star-o"></i></a>
+                                    <a href="#" id="rank-star-4" ng-click="setRank(4)"><i class="fa fa-star-o"></i></a>
+                                    <a href="#" id="rank-star-5" ng-click="setRank(5)"><i class="fa fa-star-o"></i></a>
+
+                                    <span>({{myVoting.rank}})</span>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <button ng-click="saveComment(transmission.id, myVoting)" ng-disabled="!form.$valid"
+                                            class="btn btn-primary pull-right" type="submit">
+                                        <i class="fa fa-save"></i> Save
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </form>
 
@@ -85,8 +112,16 @@
 
                 <div class="panel panel-default" ng-repeat="voting in votings">
                     <div class="panel-heading">
-                        <i class="fa fa-user-o"></i>
-                        <strong>{{ voting.user.username }}</strong>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <i class="fa fa-user-o"></i>
+                                <strong>{{ voting.user.username }}</strong>
+                            </div>
+
+                            <div class="col-md-4">
+                                <i class="fa fa-star" ng-repeat="i in range(voting.rank) track by $index"></i><i class="fa fa-star-o" ng-repeat="i in range(5 - voting.rank) track by $index"></i>
+                            </div>
+                        </div>
                     </div>
                     <div class="panel-body">{{ voting.comment }}</div>
                 </div>

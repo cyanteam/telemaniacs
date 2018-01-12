@@ -6,7 +6,13 @@ telemaniacsApp.controller('TransmissionDetailsController', [
     'PageService',
 
     function ($scope, $route, $routeParams, $location, pageService) {
+        $scope.telemaniacs = telemaniacs;
+
         pageService.setPageName('Show Details');
+
+        pageService.getDataAsync('transmission/' + $routeParams.id + '/rank').then(function (rank) {
+            $scope.rank = rank;
+        });
 
         pageService.getDataAsync('transmission/' + $routeParams.id + '/votings').then(function (votings) {
             $scope.votings = votings;
@@ -18,8 +24,22 @@ telemaniacsApp.controller('TransmissionDetailsController', [
         });
 
         $scope.myVoting = {
+            'rank': 0,
             'comment': ''
         };
+
+        $scope.range = function (n) {
+            var nums = [];
+            for (var i = 0; i < n; i++) nums.push(n);
+            return nums;
+        };
+
+        $scope.setRank = function (n) {
+            $scope.myVoting.rank = n;
+            telemaniacs.currentRank = n;
+            return false;
+        };
+
         $scope.saveComment = function (transmissionId, myVoting) {
             var errorMessages = {
                 'ValidationException': 'Invalid rating.',
