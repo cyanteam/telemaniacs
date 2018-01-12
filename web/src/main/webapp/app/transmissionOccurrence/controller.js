@@ -58,8 +58,10 @@ telemaniacsApp.controller('TransmissionOccurrencesCreateController', [
             'transmissionId': '',
             'partName': '',
             'startDate': '',
-            'isRerun': ''
+            'rerun': ''
         };
+
+        $scope.dateRegex = '\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}';
 
         pageService.getDataAsync('channel/').then(function (response) {
             $scope.channels = response;
@@ -75,7 +77,6 @@ telemaniacsApp.controller('TransmissionOccurrencesCreateController', [
 
                 var startDate = new Date(Date.parse(response.startDate));
                 $scope.transmissionOccurrence.startDate = $filter('date')(startDate, 'yyyy-MM-dd HH:mm');
-                $scope.transmissionOccurrence.isRerun = response.rerun;
 
                 pageService.getDataAsync('transmission/' + response.transmissionId).then(function (transmission) {
                     $scope.transmission = transmission;
@@ -103,6 +104,7 @@ telemaniacsApp.controller('TransmissionOccurrencesCreateController', [
             };
 
             var startDate = new Date(Date.parse(transmissionOccurrence.startDate));
+            startDate.setTime(startDate.getTime() - startDate.getTimezoneOffset() * 60 * 1000);
             transmissionOccurrence.startDate = startDate.toISOString();
 
             if (!pageService.isEditing($route)) {

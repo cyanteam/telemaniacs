@@ -11,7 +11,7 @@
                     <th>Description</th>
                     <th>Length</th>
                     <th>Language</th>
-                    <th>Transmission type</th>
+                    <th>Type</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -22,7 +22,7 @@
                     <td>{{ transmission.description}}</td>
                     <td>{{ transmission.length}}</td>
                     <td>{{ transmission.language}}</td>
-                    <td>{{ transmission.transmissionType}}</td>
+                    <td>{{ telemaniacs.transmissionTypeName(transmission.transmissionType) }}</td>
                     <td>
                         <span class="fa fa-star-o" aria-hidden="true"
                               style="color:gray;"

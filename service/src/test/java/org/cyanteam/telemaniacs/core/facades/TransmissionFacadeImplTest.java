@@ -2,6 +2,7 @@ package org.cyanteam.telemaniacs.core.facades;
 
 import javax.inject.Inject;
 
+import org.cyanteam.telemaniacs.core.dto.Schedule;
 import org.cyanteam.telemaniacs.core.dto.TransmissionCreateDTO;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,9 +25,9 @@ import org.cyanteam.telemaniacs.core.services.TransmissionService;
 import org.cyanteam.telemaniacs.core.utils.TvManagerDataAccessException;
 
 import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Matchers.anyCollection;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.*;
 
 /**
  * @author Simona Tinkova
@@ -100,6 +101,7 @@ public class TransmissionFacadeImplTest {
         transmissionDTO.setName("Update name");
         transmissionDTO.setId(1L);
 
+        when(transmissionService.findById(1L)).thenReturn(new Transmission());
         transmissionFacade.update(transmissionDTO);
         verify(transmissionService).update(any(Transmission.class));
     }
@@ -109,7 +111,7 @@ public class TransmissionFacadeImplTest {
         TransmissionDTO transmissionDTO = new TransmissionDTO();
         transmissionDTO.setId(1L);
         
-        transmissionFacade.remove(transmissionDTO);
+        transmissionFacade.remove(transmissionDTO.getId());
         verify(transmissionService).remove(any(Transmission.class));
     }
 }
