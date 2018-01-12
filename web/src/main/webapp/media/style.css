@@ -430,3 +430,17 @@ main .btn.btn-primary:hover {
         #schedule-layout main .group.now .transmission.followed .heading .progress-bar {
             background-color: #c62828;
         }
+
+#rank-bar {
+    font-size: 11px;
+    line-height: 32px;
+}
+
+    #rank-bar a {
+        font-size: 18px;
+        color: #f9a825;
+    }
+
+    #rank-bar a {
+        font-size: 18px;
+    }
