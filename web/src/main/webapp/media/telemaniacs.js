@@ -1,4 +1,10 @@
 var telemaniacs = {
+    currentRank: 0,
+
+    getRank: function () {
+        return this.currentRank;
+    },
+
     /**
      * AngularJS application
      */
@@ -73,6 +79,41 @@ var telemaniacs = {
         }
     },
 
+    rank: function () {
+        if ($('#rank-bar').length === 0) {
+            return;
+        }
+
+        for (var i = 1; i <= 5; i++) this.rankStar(i);
+    },
+
+    rankStar: function (n) {
+        var context = this;
+
+        $('#rank-star-' + n).click(function () {
+            return false;
+        });
+
+        $('#rank-star-' + n).hover(function () {
+            for (var j = 1; j <= 5; j++) {
+                $('#rank-star-' + j + ' i').removeClass();
+                $('#rank-star-' + j + ' i').addClass('fa');
+
+                if (j <= n) $('#rank-star-' + j + ' i').addClass('fa-star');
+                else $('#rank-star-' + j + ' i').addClass('fa-star-o');
+            }
+        });
+        $('#rank-star-' + n).mouseleave(function() {
+            for (var j = 1; j <= 5; j++) {
+                $('#rank-star-' + j + ' i').removeClass();
+                $('#rank-star-' + j + ' i').addClass('fa');
+
+                if (j <= context.getRank()) $('#rank-star-' + j + ' i').addClass('fa-star');
+                else $('#rank-star-' + j + ' i').addClass('fa-star-o');
+            }
+        });
+    },
+
     /**
      * Channel type name
      */
@@ -118,6 +159,7 @@ var telemaniacs = {
     boot: function () {
         this.placeNavigation();
         this.adjustContent();
+        this.rank();
 
         // Initializes Bootstrap tooltips
         $('[data-toggle="tooltip"]').tooltip();
