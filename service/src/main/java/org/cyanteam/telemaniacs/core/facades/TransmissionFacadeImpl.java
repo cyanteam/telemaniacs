@@ -156,14 +156,12 @@ public class TransmissionFacadeImpl implements TransmissionFacade {
     }
 
     @Override
-    public Double getAverageVoting(TransmissionDTO transmissionDTO) {
-        if (transmissionDTO == null) {
-            throw new IllegalArgumentException("Transmission cannot be null!");
+    public Double getAverageVoting(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException("Transmission ID cannot be null!");
         }
-        Transmission transmission = prepareTransmission(transmissionDTO);
-
+        Transmission transmission = transmissionService.findById(id);
         Double rank = transmissionService.getAverageVoting(transmission);
-
         return rank != null ? rank : 0;
     }
 

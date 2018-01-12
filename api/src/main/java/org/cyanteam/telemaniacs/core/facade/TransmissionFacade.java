@@ -118,10 +118,10 @@ public interface TransmissionFacade {
     /**
      * Get average voting of a transmission
      *
-     * @param transmissionDTO Transmission
+     * @param id Transmission ID
      * @return Average voting of given transmission, or null if no voting available
      */
-    Double getAverageVoting(TransmissionDTO transmissionDTO);
+    Double getAverageVoting(Long id);
 
     TransmissionOccurrenceCreateDTO getOccurrenceById(Long id) throws IllegalArgumentException;
 }
